@@ -1,0 +1,31 @@
+﻿{
+    "name": "Cornerstone Baptist Church",
+    "short_name": "Cornerstone Baptist",
+    "description": "Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac - A Place Where Families Grow in Faith",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#14AFB1",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "images/Cornerstone.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "images/Cornerstone.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["religion", "lifestyle"],
+    "lang": "en-US",
+    "scope": "/",
+    "prefer_related_applications": false
+}
+
+
+

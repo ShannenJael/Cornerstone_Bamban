@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visitation Report - Cornerstone Baptist Church">
+    <title>Visitation Report | Cornerstone Baptist Church</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Login Form Styles */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color, #14AFB1);
+        }
+
+        .login-container .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary-color, #14AFB1);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .login-container button:hover {
+            background: #0d8a8c;
+        }
+
+        .login-error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Report Dashboard Styles */
+        .report-dashboard {
+            display: none;
+            padding: 2rem 0;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-header h2 {
+            color: var(--primary-color, #14AFB1);
+            margin: 0;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-controls select,
+        .filter-controls input[type="date"] {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .filter-controls button {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color, #14AFB1);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .filter-controls button:hover {
+            background: #0d8a8c;
+        }
+
+        .btn-pdf {
+            background: #dc3545 !important;
+        }
+
+        .btn-pdf:hover {
+            background: #c82333 !important;
+        }
+
+        .btn-logout {
+            background: #6c757d !important;
+        }
+
+        .btn-logout:hover {
+            background: #545b62 !important;
+        }
+
+        .report-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color, #14AFB1);
+        }
+
+        .stat-card .stat-label {
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .cards-container {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .visitation-card-report {
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .visitation-card-report h3 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #333;
+        }
+
+        .card-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-row .label {
+            font-weight: 700;
+            min-width: 140px;
+        }
+
+        .card-row .value {
+            flex: 1;
+        }
+
+        .card-questions {
+            margin: 1rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #ddd;
+        }
+
+        .card-question {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.75rem 0;
+        }
+
+        .card-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .card-checkbox .check-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #333;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .card-checkbox .check-icon.checked {
+            background: #333;
+            color: #fff;
+        }
+
+        .card-meta {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .no-cards {
+            text-align: center;
+            padding: 3rem;
+            background: #fff;
+            border-radius: 8px;
+            color: #666;
+        }
+
+        .no-cards i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        @media print {
+            .navbar, .top-bar, .filter-controls, .report-stats, .btn-logout, .page-header {
+                display: none !important;
+            }
+
+            .report-dashboard {
+                display: block !important;
+                padding: 0;
+                background: #fff;
+            }
+
+            .visitation-card-report {
+                page-break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .report-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-controls {
+                width: 100%;
+            }
+
+            .filter-controls select,
+            .filter-controls button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+    <span class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    <span class="menu-label">Menu</span>
+</button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section id="loginSection" style="padding: 3rem 0; background: #f5f5f5; min-height: 60vh;">
+        <div class="login-container">
+            <h2><i class="fas fa-lock"></i> Visitation Report</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="email" id="username" name="username" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <p class="login-error" id="loginError">Invalid credentials. Please try again.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Report Dashboard -->
+    <section class="report-dashboard" id="reportDashboard">
+        <div class="container">
+            <div class="report-header">
+                <h2><i class="fas fa-clipboard-list"></i> Visitation Report</h2>
+                <div class="filter-controls">
+                    <select id="filterPeriod">
+                        <option value="all">All Time</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                    <input type="date" id="startDate" style="display: none;">
+                    <input type="date" id="endDate" style="display: none;">
+                    <button onclick="loadReport()" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <button onclick="printReport()" class="btn-pdf"><i class="fas fa-file-pdf"></i> Print/PDF</button>
+                    <button onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+
+            <div class="report-stats" id="reportStats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalVisits">0</div>
+                    <div class="stat-label">Total Visits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="answeredDoor">0</div>
+                    <div class="stat-label">Answered Door</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="noHome">0</div>
+                    <div class="stat-label">No One Home</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="leftPacket">0</div>
+                    <div class="stat-label">Left Packet</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="needFollowUp">0</div>
+                    <div class="stat-label">Need Follow-up</div>
+                </div>
+            </div>
+
+            <div class="cards-container" id="cardsContainer">
+                <!-- Cards will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const SESSION_KEY = 'visitation_report_session';
+        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+
+        // Check session on load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSession();
+
+            // Filter period change handler
+            document.getElementById('filterPeriod').addEventListener('change', function() {
+                const startDate = document.getElementById('startDate');
+                const endDate = document.getElementById('endDate');
+
+                if (this.value === 'custom') {
+                    startDate.style.display = 'inline-block';
+                    endDate.style.display = 'inline-block';
+                } else {
+                    startDate.style.display = 'none';
+                    endDate.style.display = 'none';
+                    loadReport();
+                }
+            });
+        });
+
+        function checkSession() {
+            const session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                const sessionData = JSON.parse(session);
+                if (Date.now() - sessionData.timestamp < SESSION_TIMEOUT) {
+                    showDashboard();
+                    loadReport();
+                    return;
+                }
+            }
+            showLogin();
+        }
+
+        function showLogin() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('reportDashboard').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('reportDashboard').style.display = 'block';
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const loginError = document.getElementById('loginError');
+
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            loginError.style.display = 'none';
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'login');
+                formData.append('username', username);
+                formData.append('password', password);
+
+                const response = await fetch('../php/media-handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    localStorage.setItem(SESSION_KEY, JSON.stringify({
+                        username: username,
+                        timestamp: Date.now()
+                    }));
+                    showDashboard();
+                    loadReport();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                loginError.textContent = 'Network error. Please try again.';
+                loginError.style.display = 'block';
+            }
+
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        });
+
+        async function loadReport() {
+            const period = document.getElementById('filterPeriod').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            let cards = [];
+
+            // First, try to load from server
+            try {
+                const formData = new FormData();
+                formData.append('action', 'visitation_list');
+                formData.append('period', period);
+                if (period === 'custom') {
+                    formData.append('startDate', startDate);
+                    formData.append('endDate', endDate);
+                }
+
+                const response = await fetch('../php/media-handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.success && result.cards) {
+                    cards = result.cards;
+                }
+            } catch (error) {
+                console.log('Server not available.');
+            }
+
+            // Apply period filter to server cards
+            cards = filterCardsByPeriod(cards, period, startDate, endDate);
+
+            // Sort by date descending
+            cards.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            displayCards(cards);
+            updateStats(cards);
+        }
+
+        function filterCardsByPeriod(cards, period, startDate, endDate) {
+            const now = new Date();
+            return cards.filter(card => {
+                const cardDate = new Date(card.timestamp);
+                switch (period) {
+                    case 'week':
+                        const weekStart = new Date(now);
+                        weekStart.setDate(now.getDate() - now.getDay() + 1); // Monday
+                        weekStart.setHours(0, 0, 0, 0);
+                        return cardDate >= weekStart;
+                    case 'month':
+                        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                        return cardDate >= monthStart;
+                    case 'year':
+                        const yearStart = new Date(now.getFullYear(), 0, 1);
+                        return cardDate >= yearStart;
+                    case 'custom':
+                        if (startDate && endDate) {
+                            const start = new Date(startDate);
+                            const end = new Date(endDate);
+                            end.setHours(23, 59, 59);
+                            return cardDate >= start && cardDate <= end;
+                        }
+                        return true;
+                    default:
+                        return true;
+                }
+            });
+        }
+
+        function updateStats(cards) {
+            document.getElementById('totalVisits').textContent = cards.length;
+
+            let answered = 0, noHome = 0, leftPacket = 0, followUp = 0;
+
+            cards.forEach(card => {
+                const status = card.status || [];
+                if (status.includes('answered')) answered++;
+                if (status.includes('noHome')) noHome++;
+                if (status.includes('leftPacket')) leftPacket++;
+                if (card.q4FollowUp === 'yes') followUp++;
+            });
+
+            document.getElementById('answeredDoor').textContent = answered;
+            document.getElementById('noHome').textContent = noHome;
+            document.getElementById('leftPacket').textContent = leftPacket;
+            document.getElementById('needFollowUp').textContent = followUp;
+        }
+
+        function displayCards(cards) {
+            const container = document.getElementById('cardsContainer');
+
+            if (cards.length === 0) {
+                container.innerHTML = `
+                    <div class="no-cards">
+                        <i class="fas fa-inbox"></i>
+                        <h3>No visitation cards found</h3>
+                        <p>No cards match the selected time period.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = cards.map(card => {
+                const status = card.status || [];
+                const date = new Date(card.timestamp).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="visitation-card-report">
+                        <h3>Cornerstone Baptist Church - Visitation Card</h3>
+
+                        <div class="card-row">
+                            <span class="label">NAME:</span>
+                            <span class="value">${escapeHtml(card.personName)}</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="label">ADDRESS:</span>
+                            <span class="value">${escapeHtml(card.address)}</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="label">DISTANCE:</span>
+                            <span class="value">${escapeHtml(card.distance || 'N/A')}</span>
+                        </div>
+
+                        <div class="card-questions">
+                            <div class="card-question">
+                                1. Has the person or family attended church in the past? <strong>${escapeHtml(card.q1Where || 'N/A')}</strong>
+                            </div>
+                            <div class="card-question">
+                                2. Has the person been saved and baptized? <strong>${card.q2SavedBaptized ? card.q2SavedBaptized.toUpperCase() : 'N/A'}</strong>
+                            </div>
+                            <div class="card-question">
+                                3. Would the person need a ride to church? <strong>${card.q3NeedRide ? card.q3NeedRide.toUpperCase() : 'N/A'}</strong>
+                            </div>
+                            <div class="card-question">
+                                4. Would the person like a follow up visit? <strong>${card.q4FollowUp ? card.q4FollowUp.toUpperCase() : 'N/A'}</strong>
+                            </div>
+                        </div>
+
+                        <div class="card-row">
+                            <span class="label">Please Check:</span>
+                            <span class="value">
+                                <span class="card-checkbox">
+                                    <span class="check-icon ${status.includes('answered') ? 'checked' : ''}">${status.includes('answered') ? '✓' : ''}</span>
+                                    Answered Door
+                                </span>
+                                <span class="card-checkbox">
+                                    <span class="check-icon ${status.includes('noHome') ? 'checked' : ''}">${status.includes('noHome') ? '✓' : ''}</span>
+                                    No One Home
+                                </span>
+                                <span class="card-checkbox">
+                                    <span class="check-icon ${status.includes('leftPacket') ? 'checked' : ''}">${status.includes('leftPacket') ? '✓' : ''}</span>
+                                    Left Packet/Tract
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="card-row">
+                            <span class="label">AGE:</span>
+                            <span class="value">${formatAge(card.age)}</span>
+                        </div>
+
+                        <div class="card-row">
+                            <span class="label">CHILDREN:</span>
+                            <span class="value">${card.children ? card.children.toUpperCase() : 'N/A'}</span>
+                        </div>
+
+                        ${card.comments ? `
+                        <div class="card-row">
+                            <span class="label">COMMENTS:</span>
+                            <span class="value">${escapeHtml(card.comments)}</span>
+                        </div>
+                        ` : ''}
+
+                        <div class="card-meta">
+                            <strong>Submitted by:</strong> ${escapeHtml(card.visitorName)} | <strong>Date:</strong> ${date}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function formatAge(age) {
+            if (!age) return 'N/A';
+            const ages = {
+                'young': 'Young',
+                'middleAged': 'Middle Aged',
+                'senior': 'Senior'
+            };
+            return ages[age] || age;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        function logout() {
+            localStorage.removeItem(SESSION_KEY);
+            showLogin();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

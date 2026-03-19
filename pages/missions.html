@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Missions Ministry at Cornerstone Baptist Church - Supporting missionaries and spreading the gospel worldwide.">
+    <title>Missions | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css?v=2">
+
+    <style>
+        /* Missionary Letter Section Styles */
+        .missionary-letter-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
+
+        .letter-header {
+            background: linear-gradient(135deg, #14AFB1 0%, #0d8a8c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .letter-header h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .letter-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+
+        .letter-content {
+            padding: 40px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .letter-date {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #14AFB1;
+            font-size: 0.95rem;
+        }
+
+        .letter-body {
+            white-space: pre-wrap;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .letter-pdf {
+            margin-top: 20px;
+        }
+
+        .letter-pdf a {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #14AFB1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .letter-pdf a:hover {
+            text-decoration: underline;
+        }
+
+        .letter-pdf iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .no-letter-message {
+            text-align: center;
+            padding: 60px 40px;
+            color: #666;
+        }
+
+        .no-letter-message i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .no-letter-message h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            padding: 50px 0;
+            background: #0a0a0a;
+            text-align: center;
+        }
+
+        .qr-section h3 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .qr-container {
+            display: inline-block;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .qr-container h4 {
+            color: #0a0a0a;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        #qrcode {
+            display: inline-block;
+        }
+
+        #qrcode img {
+            border-radius: 8px;
+        }
+
+        .qr-download {
+            margin-top: 15px;
+        }
+
+        .qr-download a {
+            color: #14AFB1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .qr-download a:hover {
+            text-decoration: underline;
+        }
+
+        .qr-section .qr-instructions {
+            color: #aaa;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .qr-section .qr-instructions i {
+            margin-right: 8px;
+            color: #14AFB1;
+        }
+
+        /* Admin Link (subtle) */
+        .admin-link {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .admin-link a {
+            color: #999;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .admin-link a:hover {
+            color: #14AFB1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar (Logo Only - FBC Hammond Style) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+    <a href="../index.html">
+        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+    </a>
+</div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+    <span class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    <span class="menu-label">Menu</span>
+</button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Missions</h1>
+            <p>"Go ye into all the world, and preach the gospel to every creature." - Mark 16:15</p>
+        </div>
+    </section>
+
+    <!-- Ministry Content -->
+    <section class="ministry-single-content">
+        <div class="container">
+            <div class="ministry-intro">
+                <div class="ministry-intro-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <p class="lead">We believe that God has given the church a great commission to proclaim the Gospel to all nations. Our goal is to reach people across all ethnic and language groups with the life-changing message of Jesus Christ.</p>
+            </div>
+
+            <!-- Mission Statement and Theme -->
+            <div class="program-section">
+                <h2><i class="fas fa-heart"></i> Our Mission and Theme</h2>
+                <div class="program-details">
+                    <p>Cornerstone Baptist Church is a family of individuals who have put their faith in Jesus Christ alone for eternal salvation. Our mission is to encourage and equip every one of our church members to be faithfully active in reaching people for Christ, becoming disciples and followers of Christ, growing in their faith and their personal relationship with Christ, serving the Lord and others through our local church, edifying one another as the Bible teaches that we should, and magnifying the Lord in everything we say and do.</p>
+                    <p><strong>Our theme for 2026 is "Prepare My Heart."</strong> It is our desire that every church member examine their hearts and ask the Lord to give them a yielded heart, a humble heart, and a willing heart to do what He wants them to do, and to be who He wants them to be. As we walk with the Lord and seek His will, humbly asking Him to prepare our hearts to serve Him, God will lead us in His ways through His Word. Proverbs 16:1 says, "The preparations of the heart in man, and the answer of the tongue, is from the LORD." God always equips and empowers us to do what He commands us to do. If we fully yield to Him, He will prepare our hearts to be who He wants us to be. Consider praying this prayer every day, "Lord, prepare my heart."</p>
+                </div>
+            </div>
+
+            <!-- The Great Commission -->
+            <div class="program-section">
+                <h2><i class="fas fa-book-open"></i> The Great Commission</h2>
+                <div class="program-details">
+                    <blockquote class="scripture-quote">
+                        "But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth."
+                        <cite>- Acts 1:8</cite>
+                    </blockquote>
+                    <p>As ambassadors for Christ, we are called to share the gospel both locally and globally. Our missions ministry focuses on supporting missionaries, sending mission teams, and equipping our members to be effective witnesses wherever they go.</p>
+                </div>
+            </div>
+
+            <!-- Faith Promise Missions -->
+            <div class="program-section">
+                <h2><i class="fas fa-hand-holding-heart"></i> Faith Promise Missions</h2>
+                <div class="program-details">
+                    <p>Our primary missions initiative is an annual Faith Promise program. Through Faith Promise, congregants pledge financial support beyond their regular tithe to fund missionaries and ministries around the world.</p>
+                    <div class="highlight-box">
+                        <h4>How Faith Promise Works</h4>
+                        <ol>
+                            <li>Pray and ask God what He would have you give to missions</li>
+                            <li>Make a faith commitment for the coming year</li>
+                            <li>Trust God to provide as you give</li>
+                            <li>Watch God work through your faithful giving</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Annual Missions Conference -->
+            <div class="program-section">
+                <h2><i class="fas fa-calendar-star"></i> Annual Missions Conference</h2>
+                <div class="program-details">
+                    <p>Each year, we host a Missions Conference where missionaries from around the world come to share their work and inspire our congregation. This special event launches our Faith Promise program and gives our church family the opportunity to hear firsthand how God is working across the globe.</p>
+                    <p>Check our <a href="events.html">Events page</a> for upcoming missions conference dates.</p>
+                </div>
+            </div>
+
+            <!-- Ways to Get Involved -->
+            <div class="program-section">
+                <h2><i class="fas fa-hands-helping"></i> Ways to Get Involved</h2>
+                <div class="involvement-grid">
+                    <div class="involvement-card">
+                        <div class="involvement-icon">
+                            <i class="fas fa-praying-hands"></i>
+                        </div>
+                        <h4>Pray</h4>
+                        <p>Commit to praying regularly for our missionaries and their families.</p>
+                    </div>
+
+                    <div class="involvement-card">
+                        <div class="involvement-icon">
+                            <i class="fas fa-donate"></i>
+                        </div>
+                        <h4>Give</h4>
+                        <p>Support missions through Faith Promise giving beyond your regular tithe.</p>
+                    </div>
+
+                    <div class="involvement-card">
+                        <div class="involvement-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <h4>Go</h4>
+                        <p>Join a mission trip to serve and share the gospel in another community.</p>
+                    </div>
+
+                    <div class="involvement-card">
+                        <div class="involvement-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Encourage</h4>
+                        <p>Write letters and send care packages to missionaries in the field.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missionary Letter Section -->
+    <section class="missionary-letter-section" id="missionary-letter">
+        <div class="container">
+            <div class="section-header">
+                <h2>This Week's Missionary Letter</h2>
+                <div class="divider"></div>
+                <p>Updates from our missionaries in the field</p>
+            </div>
+
+            <div class="letter-container">
+                <div class="letter-header">
+                    <h3 id="missionary-name">Missionary Update</h3>
+                    <p id="missionary-location"><i class="fas fa-map-marker-alt"></i> Mission Field</p>
+                </div>
+                <div class="letter-content" id="letter-content">
+                    <div class="no-letter-message">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <h4>No Letter Currently Available</h4>
+                        <p>Check back soon for the latest missionary letter, or contact the church office for more information.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a class="btn btn-primary" href="missions-archive.html"><i class="fas fa-folder-open"></i> View Previous Letters</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Code Section -->
+    <section class="qr-section">
+        <h3><i class="fas fa-qrcode"></i> Scan to Read on Your Phone</h3>
+        <div class="qr-container">
+            <h4>Missionary Letter</h4>
+            <div id="qrcode"></div>
+            <div class="qr-download">
+                <a id="qrDownloadLink" href="#" download="missionary-letter-qr.png">
+                    <i class="fas fa-download"></i> Download QR Code
+                </a>
+            </div>
+        </div>
+        <p class="qr-instructions">
+            <i class="fas fa-mobile-alt"></i> Scan this QR code with your phone's camera to read the missionary letter on your device
+        </p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Want to Learn More About Missions?</h2>
+                <p>Contact us to find out how you can be involved in our missions ministry.</p>
+                <a href="contact.html" class="btn btn-large btn-white">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Link (subtle) -->
+    <div class="admin-link">
+        <a href="missions-admin.html"><i class="fas fa-lock"></i> Staff Login</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A Place Where Families Grow in Faith</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li></ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/pwa-install.js"></script>
+
+    <!-- Load Missionary Letter and Generate QR Code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function renderQrCode(targetUrl) {
+                var qrcodeContainer = document.getElementById('qrcode');
+                var downloadLink = document.getElementById('qrDownloadLink');
+                if (!qrcodeContainer || typeof QRCode === 'undefined') return;
+
+                qrcodeContainer.innerHTML = '';
+                new QRCode(qrcodeContainer, {
+                    text: targetUrl,
+                    width: 150,
+                    height: 150,
+                    colorDark: "#0a0a0a",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
+                setTimeout(function() {
+                    var img = qrcodeContainer.querySelector('img');
+                    var canvas = qrcodeContainer.querySelector('canvas');
+                    if (img) {
+                        downloadLink.href = img.src;
+                    } else if (canvas) {
+                        downloadLink.href = canvas.toDataURL('image/png');
+                    } else {
+                        downloadLink.removeAttribute('href');
+                    }
+                }, 50);
+            }
+
+            // Load missionary letter from JSON file
+            fetch('../data/missionary-letter.json?t=' + Date.now())
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Letter not found');
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data && (data.content || data.pdfFile)) {
+                        document.getElementById('missionary-name').textContent = data.missionaryName || 'Missionary Update';
+                        document.getElementById('missionary-location').innerHTML = '<i class="fas fa-map-marker-alt"></i> ' + (data.location || 'Mission Field');
+
+                        var headerHtml = '<div class="letter-date"><i class="fas fa-calendar-alt"></i> ' + (data.date || 'This Week') + '</div>';
+
+                        if (data.pdfFile) {
+                            var pdfUrl = '../data/' + data.pdfFile;
+                            renderQrCode(window.location.origin + '/data/' + data.pdfFile);
+                            document.getElementById('letter-content').innerHTML =
+                                headerHtml +
+                                '<div class="letter-pdf">' +
+                                    '<a href=\"' + pdfUrl + '\" target=\"_blank\"><i class=\"fas fa-file-pdf\"></i> Open PDF Letter</a>' +
+                                    '<iframe src=\"' + pdfUrl + '\"></iframe>' +
+                                '</div>';
+                        } else {
+                            var letterUrl = window.location.href.split('#')[0] + '#missionary-letter';
+                            renderQrCode(letterUrl);
+                            var formattedContent = data.content.replace(/\n/g, '<br>');
+                            document.getElementById('letter-content').innerHTML =
+                                headerHtml +
+                                '<div class="letter-body">' + formattedContent + '</div>';
+                        }
+                    }
+                })
+                .catch(function(error) {
+                    console.log('No letter available:', error);
+                    var fallbackUrl = window.location.href.split('#')[0] + '#missionary-letter';
+                    renderQrCode(fallbackUrl);
+                    // Keep the default "no letter" message
+                });
+        });
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registered: ', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

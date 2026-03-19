@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch services online from Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac.">
+    <title>Watch | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* Watch Page Specific Styles */
+        .watch-hero {
+            position: relative;
+            background-image: url('images/harvest-cover.png');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0 40px;
+            color: white;
+        }
+
+        .watch-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .watch-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .service-times-card {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 12px;
+            padding: 28px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .service-times-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-times-card p {
+            margin: 0;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .featured-video-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            max-width: 860px;
+            margin: 30px auto 0;
+        }
+
+        .featured-video-media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+        }
+
+        .featured-video-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            z-index: 2;
+            display: none;
+        }
+
+        .live-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 180px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
+            z-index: 1;
+            display: block;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .live-placeholder.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .live-overlay {
+            position: relative;
+            background: #14AFB1;
+            color: #fff;
+            padding: 16px 18px;
+            border-radius: 0 0 10px 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .live-countdown-meta {
+            padding: 0 22px 18px;
+            color: #444;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .live-countdown-meta strong {
+            font-size: 1.4rem;
+            color: #14AFB1;
+            letter-spacing: 1px;
+        }
+
+        .featured-video-meta {
+            padding: 18px 22px 22px;
+        }
+
+        .featured-video-meta h3 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            color: #222;
+        }
+
+        .featured-video-meta .video-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Video Archives Section */
+        .video-archives {
+            background-color: #f5f5f5;
+            padding: 40px 0;
+        }
+
+        .video-section {
+            margin-bottom: 40px;
+        }
+
+        .video-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .video-section-header h3 {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .video-section-header a {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .video-section-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Carousel Container */
+        .carousel-container {
+            position: relative;
+            padding: 0 50px;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+        }
+
+        .video-grid {
+            display: flex;
+            gap: 20px;
+            padding: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .video-grid .video-card {
+            flex: 0 0 calc(33.333% - 14px);
+            min-width: calc(33.333% - 14px);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color, #14AFB1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-green, #27ae60);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+
+        @media (max-width: 900px) {
+            .video-grid .video-card {
+                flex: 0 0 calc(50% - 10px);
+                min-width: calc(50% - 10px);
+            }
+            .carousel-container {
+                padding: 0 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .video-grid .video-card {
+                flex: 0 0 100%;
+                min-width: 100%;
+            }
+            .carousel-container {
+                padding: 0 35px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+
+        .video-card {
+            flex: 0 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .video-play-btn i {
+            color: white;
+            font-size: 24px;
+            margin-left: 4px;
+        }
+
+        .video-card:hover .video-play-btn {
+            background: var(--primary-color);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            border-radius: 3px;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-info h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #333;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-info .video-date {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .video-info p {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .video-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        /* Loading state */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .loading-spinner i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .video-card {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar (Logo Only - FBC Hammond Style) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="menu-label">Menu</span>
+                </button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Watch Hero -->
+    <section class="watch-hero">
+        <div class="container">
+            <div class="featured-video-card">
+                <div class="featured-video-media">
+                    <iframe class="featured-video-frame" id="featuredVideoFrame" allowfullscreen></iframe>
+                    <div class="live-placeholder" id="livePlaceholder" style="background-image: url('images/Circle Logo.png');"></div>
+                </div>
+                <div class="live-overlay">
+                    <div>Service Times: Sunday 10:30 AM &nbsp;|&nbsp; Sunday 6:00 PM &nbsp;|&nbsp; Wednesday 7:00 PM (Central)</div>
+                    <div><strong id="liveCountdown">--:--:--</strong></div>
+                    <div id="nextServiceText">Next service: Sunday 10:30 AM (Central Time)</div>
+                </div>
+                <div class="featured-video-meta">
+                    <h3 id="featuredVideoTitle">Live Stream</h3>
+                    <div class="video-date" id="featuredVideoDate">Cornerstone Baptist Church</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Archives -->
+    <section class="video-archives">
+        <div class="container">
+            <!-- Previous Livestreams -->
+            <div class="video-section">
+                <div class="video-section-header">
+                    <h3>Previous Livestreams</h3>
+                    <a href="https://www.youtube.com/" target="_blank">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="slideCarousel('previousLivestreams', -1)" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-wrapper">
+                        <div class="video-grid" id="previousLivestreams">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next" onclick="slideCarousel('previousLivestreams', 1)" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Playlist 1 -->
+            <div class="video-section">
+                <div class="video-section-header">
+                    <h3>Prepare My Heart</h3>
+                    <a href="https://www.youtube.com//playlists" target="_blank">Click for More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="slideCarousel('playlistOne', -1)" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-wrapper">
+                        <div class="video-grid" id="playlistOne">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next" onclick="slideCarousel('playlistOne', 1)" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Playlist 2 -->
+            <div class="video-section">
+                <div class="video-section-header">
+                    <h3>Welcome to the Ministry</h3>
+                    <a href="https://www.youtube.com//playlists" target="_blank">Click for More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="slideCarousel('playlistTwo', -1)" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-wrapper">
+                        <div class="video-grid" id="playlistTwo">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next" onclick="slideCarousel('playlistTwo', 1)" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subscribe CTA -->
+            <div style="text-align: center; padding: 30px 0; background: white; border-radius: 8px; margin-bottom: 40px;">
+                <h3 style="margin-bottom: 15px; color: #333;">Never Miss a Message</h3>
+                <p style="color: #666; margin-bottom: 20px;">Subscribe to our YouTube channel to be notified when new sermons are posted.</p>
+                <a href="https://www.youtube.com/" target="_blank" class="btn btn-primary" style="background: #c4302b; border-color: #c4302b;">
+                    <i class="fab fa-youtube"></i> Subscribe on YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join Us In Person</h2>
+                <p>While online sermons are a blessing, nothing compares to worshipping together. We'd love to see you this Sunday!</p>
+                <a href="visit.html" class="btn btn-large btn-white">Plan Your Visit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+            <iframe id="modalVideo" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const YT_CHANNEL_ID = 'UCwVzeNxdYkAjn8qkoIcgbow';
+        const YT_USER_ID = 'CwVzeNxdYkAjn8qkoIcgbow';
+        const PLAYLIST_PREVIOUS_ID = 'PLqMUBm9mdRf8MsnmzEjo8kuRuBfOTP55h';
+        const PLAYLIST_ONE_ID = 'PLqMUBm9mdRf9w1MbVxgY8n4jjBEpaaRy-';
+        const PLAYLIST_TWO_ID = 'PLqMUBm9mdRf_0kblDe8m9G2BUQExf5bgL';
+        const USE_LIVE_STREAM = true;
+        const LIVE_STREAM_EMBED = `https://www.youtube.com/embed/live_stream?channel=${encodeURIComponent(YT_CHANNEL_ID)}&autoplay=1&mute=1&rel=0`;
+        const PLACEHOLDER_IMAGES = [
+            'images/Circle Logo.png'
+        ];
+        const PLACEHOLDER_INTERVAL_MS = 8000;
+
+        // Fetch videos from YouTube RSS feed via a proxy or directly
+        async function fetchYouTubeVideos() {
+            const previousContainer = document.getElementById('previousLivestreams');
+            const playlistOneContainer = document.getElementById('playlistOne');
+            const playlistTwoContainer = document.getElementById('playlistTwo');
+            const featuredFrame = document.getElementById('featuredVideoFrame');
+            const placeholder = document.getElementById('livePlaceholder');
+            const featuredTitle = document.getElementById('featuredVideoTitle');
+            const featuredDate = document.getElementById('featuredVideoDate');
+
+            try {
+                if (USE_LIVE_STREAM) {
+                    // Don't set iframe src here - updateLiveOverlay will handle it based on service times
+                    // Just set up the placeholder with church logo
+                    if (placeholder && PLACEHOLDER_IMAGES.length) {
+                        placeholder.style.backgroundImage = `url('${PLACEHOLDER_IMAGES[0]}')`;
+                    }
+                    featuredTitle.textContent = 'Live Stream';
+                    featuredDate.textContent = 'Cornerstone Baptist Church';
+                }
+                // Use YouTube's oEmbed or RSS feed
+                // Since we can't directly fetch RSS due to CORS, we'll use a fallback approach
+                // For production, you would use YouTube Data API with an API key
+
+                // Fallback: Display preset videos from the channel
+                const videos = [
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Sunday Morning Service',
+                        date: 'February 2, 2026',
+                        description: 'Join us for our Sunday morning worship service at Cornerstone Baptist Church.'
+                    },
+                    {
+                        id: 'dQw4w9WgXcQ',
+                        title: 'Sunday Evening Service',
+                        date: 'February 2, 2026',
+                        description: 'Join us for our Sunday evening service at Cornerstone Baptist Church.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Wednesday Evening Service',
+                        date: 'January 29, 2026',
+                        description: 'Midweek Bible study and prayer service.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Sunday Morning Service',
+                        date: 'January 26, 2026',
+                        description: 'Join us for our Sunday morning worship service at Cornerstone Baptist Church.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Sunday Evening Service',
+                        date: 'January 26, 2026',
+                        description: 'Join us for our Sunday evening service at Cornerstone Baptist Church.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Wednesday Evening Service',
+                        date: 'January 22, 2026',
+                        description: 'Midweek Bible study and prayer service.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Sunday Morning Service',
+                        date: 'January 19, 2026',
+                        description: 'Join us for our Sunday morning worship service at Cornerstone Baptist Church.'
+                    },
+                    {
+                        id: 'mIeRU12STNw',
+                        title: 'Sunday Evening Service',
+                        date: 'January 19, 2026',
+                        description: 'Join us for our Sunday evening service at Cornerstone Baptist Church.'
+                    }
+                ];
+
+                if (PLAYLIST_PREVIOUS_ID) {
+                    const latestVideo = await fetchPlaylistVideos(previousContainer, PLAYLIST_PREVIOUS_ID, videos, 9, true);
+                    if (latestVideo && !USE_LIVE_STREAM) {
+                        featuredFrame.src = `https://www.youtube.com/embed/${latestVideo.id}`;
+                        featuredTitle.textContent = latestVideo.title || 'Featured Sermon';
+                        featuredDate.textContent = latestVideo.date || '';
+                    }
+                } else if (YT_CHANNEL_ID) {
+                    await fetchActualVideos(previousContainer, videos, 9);
+                } else {
+                    displayVideos(previousContainer, videos, 9);
+                }
+
+                if (PLAYLIST_ONE_ID) {
+                    await fetchPlaylistVideos(playlistOneContainer, PLAYLIST_ONE_ID, videos, 9);
+                } else {
+                    displayVideos(playlistOneContainer, videos, 9);
+                }
+
+                if (PLAYLIST_TWO_ID) {
+                    await fetchPlaylistVideos(playlistTwoContainer, PLAYLIST_TWO_ID, videos, 9);
+                } else {
+                    displayVideos(playlistTwoContainer, videos, 9);
+                }
+
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+                previousContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Unable to load videos. <a href="https://www.youtube.com/" target="_blank">Visit our YouTube channel</a> to watch.</p>';
+                playlistOneContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Unable to load playlist videos. <a href="https://www.youtube.com//playlists" target="_blank">View playlists</a>.</p>';
+                playlistTwoContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Unable to load playlist videos. <a href="https://www.youtube.com//playlists" target="_blank">View playlists</a>.</p>';
+            }
+        }
+
+        async function fetchActualVideos(container, fallbackVideos, limit) {
+            try {
+                const response = await fetch(`../php/youtube-proxy.php?mode=channelLatest&channelId=${encodeURIComponent(YT_CHANNEL_ID)}&maxResults=${limit}`);
+                if (!response.ok) throw new Error('YouTube API error');
+                const data = await response.json();
+                const videos = (data.items || []).map(item => ({
+                    id: item.id && item.id.videoId ? item.id.videoId : '',
+                    title: item.snippet ? item.snippet.title : 'Service',
+                    date: item.snippet ? new Date(item.snippet.publishedAt).toLocaleDateString() : '',
+                    description: item.snippet ? item.snippet.description : ''
+                })).filter(v => v.id);
+                if (videos.length) {
+                    displayVideos(container, videos, limit);
+                } else {
+                    displayVideos(container, fallbackVideos, limit);
+                }
+            } catch (e) {
+                displayVideos(container, fallbackVideos, limit);
+            }
+        }
+
+        async function fetchPlaylistVideos(container, playlistId, fallbackVideos, limit, returnLatest = false) {
+            try {
+                console.log('Fetching playlist:', playlistId);
+                const response = await fetch(`../php/youtube-proxy.php?mode=playlistItems&playlistId=${encodeURIComponent(playlistId)}&maxResults=${limit}`);
+                console.log('Response status:', response.status, response.ok);
+                if (!response.ok) throw new Error('YouTube API error');
+                const data = await response.json();
+                console.log('API data:', data);
+                const videos = (data.items || []).map(item => ({
+                    id: item.snippet && item.snippet.resourceId ? item.snippet.resourceId.videoId : '',
+                    title: item.snippet ? item.snippet.title : 'Playlist Video',
+                    date: item.snippet ? new Date(item.snippet.publishedAt).toLocaleDateString() : '',
+                    description: item.snippet ? item.snippet.description : ''
+                })).filter(v => v.id);
+                console.log('Parsed videos:', videos.length, videos);
+                if (videos.length) {
+                    displayVideos(container, videos, limit);
+                    if (returnLatest) {
+                        return videos[0];
+                    }
+                } else {
+                    console.log('No videos found, using fallback');
+                    displayVideos(container, fallbackVideos, limit);
+                }
+            } catch (e) {
+                console.error('Fetch error:', e);
+                displayVideos(container, fallbackVideos, limit);
+            }
+            return null;
+        }
+
+        // Carousel state tracking
+        const carouselState = {
+            previousLivestreams: { index: 0, total: 0 },
+            playlistOne: { index: 0, total: 0 },
+            playlistTwo: { index: 0, total: 0 }
+        };
+
+        function displayVideos(container, videos, limit = 6) {
+            container.innerHTML = '';
+            const containerId = container.id;
+
+            // Store total videos for carousel
+            if (carouselState[containerId]) {
+                carouselState[containerId].total = videos.length;
+                carouselState[containerId].index = 0;
+            }
+
+            videos.slice(0, limit).forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.onclick = () => openVideoModal(video.id);
+
+                card.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title}">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4>${video.title}</h4>
+                        <div class="video-date"><i class="far fa-calendar-alt"></i> ${video.date}</div>
+                        <p>${video.description}</p>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            // Update carousel buttons state
+            updateCarouselButtons(containerId);
+        }
+
+        function getVisibleCards() {
+            const width = window.innerWidth;
+            if (width <= 600) return 1;
+            if (width <= 900) return 2;
+            return 3;
+        }
+
+        function slideCarousel(containerId, direction) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const cards = container.querySelectorAll('.video-card');
+            if (cards.length === 0) return;
+
+            const visibleCards = getVisibleCards();
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            const state = carouselState[containerId];
+
+            if (!state) return;
+
+            // Update index
+            state.index = Math.max(0, Math.min(maxIndex, state.index + direction));
+
+            // Calculate translation
+            const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+            const translateX = -state.index * cardWidth;
+
+            container.style.transform = `translateX(${translateX}px)`;
+
+            // Update button states
+            updateCarouselButtons(containerId);
+        }
+
+        function updateCarouselButtons(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const carouselContainer = container.closest('.carousel-container');
+            if (!carouselContainer) return;
+
+            const prevBtn = carouselContainer.querySelector('.carousel-btn.prev');
+            const nextBtn = carouselContainer.querySelector('.carousel-btn.next');
+
+            const cards = container.querySelectorAll('.video-card');
+            const visibleCards = getVisibleCards();
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            const state = carouselState[containerId];
+
+            if (prevBtn) {
+                prevBtn.disabled = !state || state.index <= 0;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = !state || state.index >= maxIndex;
+            }
+        }
+
+        // Update carousel on window resize
+        window.addEventListener('resize', () => {
+            Object.keys(carouselState).forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.style.transform = 'translateX(0)';
+                    carouselState[containerId].index = 0;
+                    updateCarouselButtons(containerId);
+                }
+            });
+        });
+
+        function openVideoModal(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalVideo');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalVideo');
+            iframe.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal on backdrop click
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeVideoModal();
+            }
+        });
+
+        function getNowInTimeZone(timeZone) {
+            return new Date(new Date().toLocaleString('en-US', { timeZone }));
+        }
+
+        const SERVICE_SCHEDULE = [
+            { day: 0, hour: 10, minute: 30, label: 'Sunday 10:30 AM' },
+            { day: 0, hour: 18, minute: 0, label: 'Sunday 6:00 PM' },
+            { day: 3, hour: 19, minute: 0, label: 'Wednesday 7:00 PM' }
+        ];
+
+        function getNextServiceTime(nowTz) {
+            let next = null;
+            for (let i = 0; i <= 7; i++) {
+                const candidate = new Date(nowTz.getTime());
+                candidate.setDate(nowTz.getDate() + i);
+                const weekday = candidate.getDay();
+                SERVICE_SCHEDULE.forEach(service => {
+                    if (service.day !== weekday) return;
+                    const target = new Date(candidate.getTime());
+                    target.setHours(service.hour, service.minute, 0, 0);
+                    if (target.getTime() <= nowTz.getTime()) return;
+                    if (!next || target.getTime() < next.time.getTime()) {
+                        next = { time: target, label: service.label };
+                    }
+                });
+            }
+            return next;
+        }
+
+        function getActiveService(nowTz, liveWindowMs, earlyStartMs) {
+            for (let offset = 0; offset <= 1; offset++) {
+                const candidate = new Date(nowTz.getTime());
+                candidate.setDate(nowTz.getDate() - offset);
+                const weekday = candidate.getDay();
+                for (const service of SERVICE_SCHEDULE) {
+                    if (service.day !== weekday) continue;
+                    const target = new Date(candidate.getTime());
+                    target.setHours(service.hour, service.minute, 0, 0);
+                    const diff = nowTz.getTime() - target.getTime();
+                    if (diff >= -earlyStartMs && diff < liveWindowMs) {
+                        return { time: target, label: service.label };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function formatCountdown(ms) {
+            const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+            const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const seconds = String(totalSeconds % 60).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        let iframeLoaded = false;
+        let currentLiveVideoId = null;
+        let lastLiveCheck = 0;
+        const LIVE_CHECK_INTERVAL = 30000; // Check for live stream every 30 seconds
+
+        // Check for active live stream using YouTube API
+        async function checkForLiveStream() {
+            try {
+                const response = await fetch(`../php/youtube-proxy.php?mode=channelLatest&channelId=${encodeURIComponent(YT_CHANNEL_ID)}&maxResults=5`);
+                if (!response.ok) return null;
+                const data = await response.json();
+
+                // Look for live broadcast in results
+                if (data.items) {
+                    for (const item of data.items) {
+                        if (item.snippet && item.snippet.liveBroadcastContent === 'live') {
+                            return item.id.videoId;
+                        }
+                    }
+                }
+                return null;
+            } catch (e) {
+                console.log('Live stream check failed:', e);
+                return null;
+            }
+        }
+
+        async function updateLiveOverlay() {
+            const countdown = document.getElementById('liveCountdown');
+            const nextService = document.getElementById('nextServiceText');
+            const featuredFrame = document.getElementById('featuredVideoFrame');
+            const placeholder = document.getElementById('livePlaceholder');
+            const featuredTitle = document.getElementById('featuredVideoTitle');
+            const timeZone = 'America/Chicago';
+            const nowTz = getNowInTimeZone(timeZone);
+            const next = getNextServiceTime(nowTz);
+
+            // Periodically check for active live stream
+            const now = Date.now();
+            if (now - lastLiveCheck > LIVE_CHECK_INTERVAL) {
+                lastLiveCheck = now;
+                const liveVideoId = await checkForLiveStream();
+                if (liveVideoId && liveVideoId !== currentLiveVideoId) {
+                    currentLiveVideoId = liveVideoId;
+                    console.log('Found live stream:', liveVideoId);
+                }
+            }
+
+            // Show live stream embed
+            if (featuredFrame) {
+                featuredFrame.style.display = 'block';
+                let targetSrc;
+                if (currentLiveVideoId) {
+                    // Use specific live video ID for better reliability
+                    targetSrc = `https://www.youtube.com/embed/${currentLiveVideoId}?autoplay=1&mute=1&rel=0`;
+                    if (featuredTitle) featuredTitle.textContent = 'LIVE NOW';
+                } else {
+                    // Fall back to channel-based live stream embed
+                    targetSrc = LIVE_STREAM_EMBED;
+                    if (featuredTitle) featuredTitle.textContent = 'Live Stream';
+                }
+                if (featuredFrame.src !== targetSrc) {
+                    featuredFrame.src = targetSrc;
+                }
+            }
+
+            // Only hide placeholder after iframe has loaded
+            if (placeholder && iframeLoaded) {
+                placeholder.classList.add('hidden');
+            }
+
+            // Update countdown display for next service time
+            if (next) {
+                const diff = next.time.getTime() - nowTz.getTime();
+                const liveWindow = 2 * 60 * 60 * 1000;
+                const earlyStart = 15 * 60 * 1000;
+                const active = getActiveService(nowTz, liveWindow, earlyStart);
+
+                if (currentLiveVideoId || active) {
+                    countdown.textContent = 'LIVE';
+                    nextService.textContent = 'Live now';
+                } else {
+                    countdown.textContent = formatCountdown(diff);
+                    nextService.textContent = `${next.label} (Central Time)`;
+                }
+            }
+        }
+
+        function startPlaceholderRotation() {
+            const placeholder = document.getElementById('livePlaceholder');
+            if (!placeholder || PLACEHOLDER_IMAGES.length === 0) {
+                return;
+            }
+            let index = 0;
+            placeholder.style.backgroundImage = `url('${PLACEHOLDER_IMAGES[index]}')`;
+            if (PLACEHOLDER_IMAGES.length === 1) {
+                return;
+            }
+            setInterval(() => {
+                index = (index + 1) % PLACEHOLDER_IMAGES.length;
+                placeholder.style.backgroundImage = `url('${PLACEHOLDER_IMAGES[index]}')`;
+            }, PLACEHOLDER_INTERVAL_MS);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchYouTubeVideos();
+            updateLiveOverlay();
+            startPlaceholderRotation();
+            setInterval(updateLiveOverlay, 1000);
+
+            const featuredFrame = document.getElementById('featuredVideoFrame');
+            const placeholder = document.getElementById('livePlaceholder');
+            if (featuredFrame && placeholder) {
+                featuredFrame.addEventListener('load', () => {
+                    // Mark iframe as loaded and hide placeholder
+                    iframeLoaded = true;
+                    placeholder.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1580 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cornerstone Media Library - File Repository">
+    <title>Media Library | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #0b0b0b;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .library-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+
+        .library-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .library-header h1 i {
+            color: #d4af37;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-info {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #b18f2b 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(20, 175, 177, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Login Section */
+        .login-section {
+            max-width: 450px;
+            margin: 80px auto;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .login-section h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .login-section .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(20, 175, 177, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+        }
+
+        .login-error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ff6b6b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Main Layout */
+        .library-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            display: none;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .folder-tree {
+            list-style: none;
+        }
+
+        .folder-item {
+            margin-bottom: 5px;
+        }
+
+        .folder-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .folder-link:hover, .folder-link.active {
+            background: rgba(20, 175, 177, 0.2);
+            color: #d4af37;
+        }
+
+        .folder-link.drag-over,
+        .folder-card.drag-over {
+            background: rgba(20, 175, 177, 0.18);
+            box-shadow: 0 0 0 2px rgba(20, 175, 177, 0.5);
+        }
+
+        .folder-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .folder-children {
+            list-style: none;
+            margin-left: 20px;
+            display: none;
+        }
+
+        .folder-item.expanded > .folder-children {
+            display: block;
+        }
+
+        .folder-toggle {
+            margin-left: auto;
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        .folder-item.expanded > .folder-link .folder-toggle {
+            transform: rotate(90deg);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .breadcrumb a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #d4af37;
+            background: rgba(20, 175, 177, 0.1);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .upload-area h4 {
+            margin-bottom: 8px;
+        }
+
+        .upload-area p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* File Grid */
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .file-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .file-preview {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .file-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .file-preview i {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .file-preview .file-type-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .file-info {
+            padding: 15px;
+        }
+
+        .file-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 5px;
+        }
+
+        .file-meta {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Folder Card */
+        .folder-card {
+            background: rgba(20, 175, 177, 0.1);
+            border-color: rgba(20, 175, 177, 0.3);
+            position: relative;
+        }
+
+        .folder-card .file-preview {
+            background: rgba(20, 175, 177, 0.1);
+        }
+
+        .folder-card .file-preview i {
+            color: #d4af37;
+        }
+
+        .folder-delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(220, 53, 69, 0.85);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.75rem;
+            z-index: 10;
+        }
+
+        .folder-card:hover .folder-delete-btn {
+            display: flex;
+        }
+
+        .folder-delete-btn:hover {
+            background: rgba(220, 53, 69, 1);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #151515;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Upload Progress */
+        .upload-progress {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #b18f2b);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status-message.success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #5dd879;
+        }
+
+        .status-message.error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ff6b6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .library-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .library-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .content-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .file-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection" class="login-section">
+            <div style="text-align:center;margin-bottom:20px;">
+                <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo" style="height:90px;width:auto;">
+            </div>
+            <h2><i class="fas fa-photo-film"></i> Media Library</h2>
+            <p class="subtitle">Cornerstone Baptist Church File Repository</p>
+
+            <div id="loginError" class="login-error"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="username" name="username" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+        </div>
+
+        <!-- Library Section (hidden until logged in) -->
+        <div id="librarySection" style="display: none;">
+            <header class="library-header">
+                <h1><img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo" style="height:45px;width:auto;vertical-align:middle;margin-right:12px;"><i class="fas fa-photo-film"></i> Cornerstone Media Library</h1>
+                <div class="header-actions">
+                    <span class="user-info" id="userDisplay"></span>
+                    <button class="btn btn-secondary" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </header>
+
+            <div class="library-layout" id="libraryLayout">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <h3>Categories</h3>
+                    <ul class="folder-tree" id="folderTree">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-content">
+                    <div class="content-header">
+                        <div class="breadcrumb" id="breadcrumb">
+                            <a href="#" onclick="navigateTo('')">Home</a>
+                        </div>
+                        <div class="content-actions">
+                            <button class="btn btn-secondary" onclick="openNewFolderModal()">
+                                <i class="fas fa-folder-plus"></i> New Folder
+                            </button>
+                            <button class="btn btn-danger" onclick="openDeleteFolderModal()">
+                                <i class="fas fa-folder-minus"></i> Delete Folder
+                            </button>
+                            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="statusMessage" class="status-message"></div>
+
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h4>Drag & Drop Files Here</h4>
+                        <p>or click to browse your computer</p>
+                        <input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.ppt,.pptx">
+                    </div>
+
+                    <div class="upload-progress" id="uploadProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Uploading...</p>
+                    </div>
+
+                    <div class="file-grid" id="fileGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>This folder is empty</h3>
+                        <p>Upload files or create a new folder to get started</p>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Folder Modal -->
+    <div class="modal-overlay" id="newFolderModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-folder-plus"></i> Create New Folder</h3>
+                <button class="modal-close" onclick="closeModal('newFolderModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="folderName">Folder Name</label>
+                    <input type="text" id="folderName" placeholder="Enter folder name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('newFolderModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="createFolder()">Create Folder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Folder Modal -->
+    <div class="modal-overlay" id="deleteFolderModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-folder-minus" style="color:#dc3545;"></i> Delete Folder</h3>
+                <button class="modal-close" onclick="closeModal('deleteFolderModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color:rgba(255,255,255,0.7);margin-bottom:16px;">Select a folder to delete. All contents inside will be permanently removed.</p>
+                <div class="form-group">
+                    <label for="deleteFolderSelect">Choose Folder</label>
+                    <select id="deleteFolderSelect" style="width:100%;padding:12px;border:1px solid rgba(255,255,255,0.3);border-radius:8px;background:#1e2d3d;color:#ffffff;font-size:1rem;">
+                        <option value="">-- Select a folder --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('deleteFolderModal')">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmDeleteFolder()"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Details Modal -->
+    <div class="modal-overlay" id="fileDetailsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-file"></i> File Details</h3>
+                <button class="modal-close" onclick="closeModal('fileDetailsModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="fileDetailsContent">
+                <!-- Populated by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" onclick="deleteSelectedFile()">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="btn btn-secondary" onclick="moveSelectedFile()">
+                    <i class="fas fa-folder-open"></i> Move
+                </button>
+                <a id="downloadLink" class="btn btn-primary" href="#" download>
+                    <i class="fas fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const SESSION_KEY = 'calvary_media_session';
+        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+
+        let currentPath = '';
+        let selectedFile = null;
+
+        // Folder structure
+        const defaultFolderStructure = [
+            {
+                name: 'Worship Services',
+                icon: 'fa-music',
+                children: [
+                    { name: 'Sunday Traditional', icon: 'fa-church' },
+                    { name: 'Sunday Contemporary', icon: 'fa-guitar' },
+                    { name: 'Wednesday Services', icon: 'fa-bible' },
+                    { name: 'Special Services', icon: 'fa-star' }
+                ]
+            },
+            {
+                name: 'Ministries',
+                icon: 'fa-hands-helping',
+                children: [
+                    { name: 'Children (Kids)', icon: 'fa-child' },
+                    { name: 'Youth (Students)', icon: 'fa-users' },
+                    { name: 'Adults', icon: 'fa-user-friends' },
+                    { name: 'Missions', icon: 'fa-globe' },
+                    { name: 'Seniors', icon: 'fa-heart' }
+                ]
+            },
+            {
+                name: 'Special Events',
+                icon: 'fa-calendar-star',
+                children: [
+                    { name: 'Easter', icon: 'fa-cross' },
+                    { name: 'Christmas', icon: 'fa-gift' },
+                    { name: 'VBS', icon: 'fa-sun' },
+                    { name: 'Baptisms', icon: 'fa-water' },
+                    { name: 'Community Outreach', icon: 'fa-hand-holding-heart' }
+                ]
+            },
+            {
+                name: 'Staff & Leadership',
+                icon: 'fa-user-tie',
+                children: [
+                    { name: 'Headshots', icon: 'fa-portrait' },
+                    { name: 'Team Photos', icon: 'fa-users' },
+                    { name: 'Pastor Media', icon: 'fa-microphone' }
+                ]
+            },
+            {
+                name: 'Facilities',
+                icon: 'fa-building',
+                children: [
+                    { name: 'Church Grounds', icon: 'fa-tree' },
+                    { name: 'Sanctuary', icon: 'fa-church' },
+                    { name: 'Fellowship Hall', icon: 'fa-utensils' },
+                    { name: 'Classrooms', icon: 'fa-chalkboard' },
+                    { name: 'Parking & Exterior', icon: 'fa-car' }
+                ]
+            },
+            {
+                name: 'Technical',
+                icon: 'fa-cog',
+                children: [
+                    { name: 'High-Resolution (Print)', icon: 'fa-print' },
+                    { name: 'Web-Optimized', icon: 'fa-globe' },
+                    { name: 'Public-Ready', icon: 'fa-check-circle' },
+                    { name: 'Working Files', icon: 'fa-tools' }
+                ]
+            }
+        ];
+        let folderStructure = [];
+
+        // Login handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const formData = new FormData();
+            formData.append('action', 'login');
+            formData.append('username', username);
+            formData.append('password', password);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const session = {
+                        username: username,
+                        timestamp: Date.now()
+                    };
+                    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+                    showLibrary(username);
+                } else {
+                    document.getElementById('loginError').textContent = data.message || 'Invalid credentials';
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                document.getElementById('loginError').textContent = 'Connection error. Please try again.';
+                document.getElementById('loginError').style.display = 'block';
+            });
+        });
+
+        function checkSession() {
+            const session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                const sessionData = JSON.parse(session);
+                if (Date.now() - sessionData.timestamp < SESSION_TIMEOUT) {
+                    showLibrary(sessionData.username);
+                    return;
+                }
+            }
+            showLogin();
+        }
+
+        function showLibrary(username) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('librarySection').style.display = 'block';
+            document.getElementById('libraryLayout').style.display = 'grid';
+            document.getElementById('userDisplay').textContent = username;
+
+            refreshFolderStructure().then(() => {
+                renderFolderTree();
+                loadFiles();
+            });
+        }
+
+        function showLogin() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('librarySection').style.display = 'none';
+            localStorage.removeItem(SESSION_KEY);
+        }
+
+        function handleLogout() {
+            showLogin();
+        }
+
+        // Folder tree rendering
+        function renderFolderTree() {
+            const tree = document.getElementById('folderTree');
+            tree.innerHTML = '';
+
+            // Add Home link
+            const homeItem = document.createElement('li');
+            homeItem.className = 'folder-item';
+            homeItem.innerHTML = `
+                <div class="folder-link ${currentPath === '' ? 'active' : ''}" data-path="" onclick="navigateTo('')">
+                    <i class="fas fa-home"></i>
+                    <span>All Files</span>
+                </div>
+            `;
+            tree.appendChild(homeItem);
+            bindFolderDropTarget(homeItem.querySelector('.folder-link'));
+
+            folderStructure.forEach(folder => {
+                const item = createFolderItem(folder, '');
+                tree.appendChild(item);
+            });
+        }
+
+        function createFolderItem(folder, parentPath) {
+            const path = parentPath ? `${parentPath}/${folder.name}` : folder.name;
+            const item = document.createElement('li');
+            item.className = 'folder-item';
+
+            const hasChildren = folder.children && folder.children.length > 0;
+            const isVirtual = folder.virtual === true;
+
+            item.innerHTML = `
+                <div class="folder-link ${currentPath === path ? 'active' : ''}" data-path="${isVirtual ? '' : path}" ${isVirtual ? '' : `onclick="navigateTo('${path}')"`}>
+                    <i class="fas ${folder.icon || 'fa-folder'}"></i>
+                    <span>${folder.name}</span>
+                    ${hasChildren ? '<i class="fas fa-chevron-right folder-toggle"></i>' : ''}
+                </div>
+            `;
+            if (!isVirtual) {
+                bindFolderDropTarget(item.querySelector('.folder-link'));
+            }
+
+            if (hasChildren) {
+                const childList = document.createElement('ul');
+                childList.className = 'folder-children';
+                folder.children.forEach(child => {
+                    childList.appendChild(createFolderItem(child, path));
+                });
+                item.appendChild(childList);
+
+                item.querySelector('.folder-link').addEventListener('click', function(e) {
+                    if (isVirtual) {
+                        e.preventDefault();
+                        item.classList.toggle('expanded');
+                        return;
+                    }
+                    if (e.target.classList.contains('folder-toggle') || e.target.parentElement.classList.contains('folder-toggle')) {
+                        e.stopPropagation();
+                        item.classList.toggle('expanded');
+                    }
+                });
+            }
+
+            return item;
+        }
+
+        function navigateTo(path) {
+            currentPath = path;
+            updateBreadcrumb();
+            renderFolderTree();
+            loadFiles();
+        }
+
+        function updateBreadcrumb() {
+            const breadcrumb = document.getElementById('breadcrumb');
+            let html = '<a href="#" onclick="navigateTo(\'\')">Home</a>';
+
+            if (currentPath) {
+                const parts = currentPath.split('/');
+                let accumPath = '';
+                parts.forEach((part, index) => {
+                    accumPath += (index > 0 ? '/' : '') + part;
+                    html += ` <i class="fas fa-chevron-right"></i> `;
+                    if (index === parts.length - 1) {
+                        html += `<span>${part}</span>`;
+                    } else {
+                        html += `<a href="#" onclick="navigateTo('${accumPath}')">${part}</a>`;
+                    }
+                });
+            }
+
+            breadcrumb.innerHTML = html;
+        }
+
+        // File operations
+        function loadFiles() {
+            const formData = new FormData();
+            formData.append('action', 'list');
+            formData.append('path', currentPath);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    renderFiles(data.folders || [], data.files || []);
+                    if (currentPath === '') {
+                        refreshFolderStructure(data.folders || []);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error loading files:', error);
+            });
+        }
+
+        function renderFiles(folders, files) {
+            const grid = document.getElementById('fileGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            grid.innerHTML = '';
+
+            if (folders.length === 0 && files.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            // Render folders first
+            folders.forEach(folder => {
+                const folderPath = currentPath ? `${currentPath}/${folder}` : folder;
+                const card = document.createElement('div');
+                card.className = 'file-card folder-card';
+                card.onclick = () => navigateTo(folderPath);
+                bindFolderDropTarget(card, folderPath);
+                card.innerHTML = `
+                    <button class="folder-delete-btn" title="Delete folder"><i class="fas fa-trash"></i></button>
+                    <div class="file-preview">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">${folder}</div>
+                        <div class="file-meta">Folder</div>
+                    </div>
+                `;
+                card.querySelector('.folder-delete-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteFolder(folderPath, folder);
+                });
+                grid.appendChild(card);
+            });
+
+            // Render files
+            files.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'file-card';
+                card.onclick = () => showFileDetails(file);
+                card.setAttribute('draggable', 'true');
+                card.dataset.fileName = file.name;
+                card.addEventListener('dragstart', handleFileDragStart);
+
+                const ext = file.name.split('.').pop().toLowerCase();
+                const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+                const isVideo = ['mp4', 'mov', 'avi', 'webm'].includes(ext);
+                const isPdf = ext === 'pdf';
+
+                let previewHtml = '';
+                if (isImage) {
+                    previewHtml = `<img src="${file.url}" alt="${file.name}">`;
+                } else if (isVideo) {
+                    previewHtml = `<i class="fas fa-video"></i>`;
+                } else if (isPdf) {
+                    previewHtml = `<i class="fas fa-file-pdf"></i>`;
+                } else {
+                    previewHtml = `<i class="fas fa-file"></i>`;
+                }
+
+                card.innerHTML = `
+                    <div class="file-preview">
+                        ${previewHtml}
+                        <span class="file-type-icon">${ext}</span>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-meta">${formatFileSize(file.size)}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // File upload
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+
+            const progressDiv = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            progressDiv.style.display = 'block';
+
+            let uploaded = 0;
+            const total = files.length;
+
+            Array.from(files).forEach(file => {
+                const formData = new FormData();
+                formData.append('action', 'upload');
+                formData.append('path', currentPath);
+                formData.append('file', file);
+
+                fetch('../php/media-handler.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    uploaded++;
+                    const percent = Math.round((uploaded / total) * 100);
+                    progressFill.style.width = percent + '%';
+                    progressText.textContent = `Uploading... ${uploaded}/${total} files`;
+
+                    if (uploaded === total) {
+                        setTimeout(() => {
+                            progressDiv.style.display = 'none';
+                            progressFill.style.width = '0%';
+                            showStatus(data.success ? 'Files uploaded successfully!' : 'Some files failed to upload', data.success ? 'success' : 'error');
+                            loadFiles();
+                        }, 500);
+                    }
+                })
+                .catch(error => {
+                    uploaded++;
+                    if (uploaded === total) {
+                        progressDiv.style.display = 'none';
+                        showStatus('Upload failed. Please try again.', 'error');
+                    }
+                });
+            });
+
+            fileInput.value = '';
+        }
+
+        // Folder creation
+        function openNewFolderModal() {
+            document.getElementById('folderName').value = '';
+            document.getElementById('newFolderModal').classList.add('active');
+        }
+
+        function createFolder() {
+            const name = document.getElementById('folderName').value.trim();
+            if (!name) {
+                alert('Please enter a folder name');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'createFolder');
+            formData.append('path', currentPath);
+            formData.append('name', name);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                closeModal('newFolderModal');
+                if (data.success) {
+                    showStatus('Folder created successfully!', 'success');
+                    loadFiles();
+                } else {
+                    showStatus(data.message || 'Failed to create folder', 'error');
+                }
+            });
+        }
+
+        // Delete Folder modal (header button)
+        function openDeleteFolderModal() {
+            const select = document.getElementById('deleteFolderSelect');
+            select.innerHTML = '<option value="">Loading folders...</option>';
+            document.getElementById('deleteFolderModal').classList.add('active');
+
+            const formData = new FormData();
+            formData.append('action', 'listAllFolders');
+
+            fetch('../php/media-handler.php', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    const folders = data.folders || [];
+                    select.innerHTML = '<option value="">-- Select a folder --</option>';
+                    if (folders.length === 0) {
+                        select.innerHTML = '<option value="">No folders available</option>';
+                    } else {
+                        folders.forEach(f => {
+                            const opt = document.createElement('option');
+                            opt.value = f;
+                            const depth = (f.match(/\//g) || []).length;
+                            opt.textContent = '\u00A0'.repeat(depth * 3) + f.split('/').pop();
+                            select.appendChild(opt);
+                        });
+                    }
+                })
+                .catch(() => {
+                    select.innerHTML = '<option value="">Error loading folders</option>';
+                });
+        }
+
+        function confirmDeleteFolder() {
+            const select = document.getElementById('deleteFolderSelect');
+            const folderPath = select.value;
+            if (!folderPath) {
+                alert('Please select a folder to delete.');
+                return;
+            }
+            closeModal('deleteFolderModal');
+            deleteFolderByPath(folderPath);
+        }
+
+        // Delete folder by full relative path (used by header modal)
+        function deleteFolderByPath(folderPath) {
+            const displayName = folderPath.split('/').pop();
+            if (!confirm(`Are you sure you want to delete the folder "${displayName}" and all its contents?\n\nThis cannot be undone.`)) return;
+
+            const formData = new FormData();
+            formData.append('action', 'deleteFolder');
+            formData.append('path', folderPath);
+
+            fetch('../php/media-handler.php', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        showStatus('Folder deleted successfully!', 'success');
+                        refreshFolderStructure().then(() => {
+                            renderFolderTree();
+                            loadFiles();
+                        });
+                    } else {
+                        showStatus(data.message || 'Failed to delete folder', 'error');
+                    }
+                })
+                .catch(() => showStatus('Failed to delete folder', 'error'));
+        }
+
+        // Delete folder by hover trash icon on folder cards
+        function deleteFolder(folderPath, folderName) {
+            if (!confirm(`Are you sure you want to delete the folder "${folderName}" and all its contents?\n\nThis cannot be undone.`)) return;
+
+            const formData = new FormData();
+            formData.append('action', 'deleteFolder');
+            formData.append('path', folderPath);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStatus('Folder deleted successfully!', 'success');
+                    refreshFolderStructure().then(() => {
+                        renderFolderTree();
+                        loadFiles();
+                    });
+                } else {
+                    showStatus(data.message || 'Failed to delete folder', 'error');
+                }
+            });
+        }
+
+        // File details
+        function showFileDetails(file) {
+            selectedFile = file;
+
+            const ext = file.name.split('.').pop().toLowerCase();
+            const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+
+            let previewHtml = '';
+            if (isImage) {
+                previewHtml = `<img src="${file.url}" alt="${file.name}" style="max-width:100%;border-radius:8px;margin-bottom:15px;">`;
+            }
+
+            document.getElementById('fileDetailsContent').innerHTML = `
+                ${previewHtml}
+                <p><strong>Name:</strong> ${file.name}</p>
+                <p><strong>Size:</strong> ${formatFileSize(file.size)}</p>
+                <p><strong>Type:</strong> ${ext.toUpperCase()}</p>
+                <p><strong>Path:</strong> ${currentPath || 'Root'}</p>
+                <div style="margin-top: 16px;">
+                    <label for="moveTargetSelect" style="display:block;font-weight:600;margin-bottom:6px;">Move to folder</label>
+                    <select id="moveTargetSelect" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+                        ${buildFolderOptions()}
+                    </select>
+                </div>
+            `;
+
+            document.getElementById('downloadLink').href = file.url;
+            document.getElementById('downloadLink').download = file.name;
+
+            document.getElementById('fileDetailsModal').classList.add('active');
+        }
+
+        function deleteSelectedFile() {
+            if (!selectedFile) return;
+
+            if (!confirm(`Are you sure you want to delete "${selectedFile.name}"?`)) return;
+
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('path', currentPath);
+            formData.append('file', selectedFile.name);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                closeModal('fileDetailsModal');
+                if (data.success) {
+                    showStatus('File deleted successfully!', 'success');
+                    loadFiles();
+                } else {
+                    showStatus(data.message || 'Failed to delete file', 'error');
+                }
+            });
+        }
+
+        function buildFolderOptions() {
+            const options = [];
+            options.push(`<option value="">Root</option>`);
+
+            function walkFolders(nodes, prefix) {
+                nodes.forEach(node => {
+                    if (node.virtual) {
+                        if (node.children && node.children.length) {
+                            walkFolders(node.children, prefix);
+                        }
+                        return;
+                    }
+                    const path = prefix ? `${prefix}/${node.name}` : node.name;
+                    options.push(`<option value="${path}" ${currentPath === path ? 'selected' : ''}>${path}</option>`);
+                    if (node.children && node.children.length) {
+                        walkFolders(node.children, path);
+                    }
+                });
+            }
+
+            walkFolders(folderStructure, '');
+            return options.join('');
+        }
+
+        function refreshFolderStructure(rootFolders) {
+            if (rootFolders) {
+                folderStructure = buildFolderStructure(rootFolders);
+                renderFolderTree();
+                return Promise.resolve();
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'list');
+            formData.append('path', '');
+
+            return fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    folderStructure = buildFolderStructure(data.folders || []);
+                } else {
+                    folderStructure = [...defaultFolderStructure];
+                }
+            })
+            .catch(() => {
+                folderStructure = [...defaultFolderStructure];
+            });
+        }
+
+        function buildFolderStructure(rootFolders) {
+            const defaultNames = defaultFolderStructure.map(folder => folder.name);
+            const userRoots = rootFolders.filter(folder => !defaultNames.includes(folder));
+
+            const orderedDefaults = [];
+            const order = ['Worship Services', 'Ministries', 'Special Events', 'Staff & Leadership', 'Facilities', 'Technical'];
+            order.forEach(name => {
+                const found = defaultFolderStructure.find(folder => folder.name === name);
+                if (found) orderedDefaults.push(found);
+            });
+
+            const structure = [];
+            if (userRoots.length) {
+                structure.push({
+                    name: 'Folders',
+                    icon: 'fa-folder-tree',
+                    children: userRoots.map(name => ({ name, icon: 'fa-folder' })),
+                    virtual: true
+                });
+            }
+            orderedDefaults.forEach(folder => structure.push(folder));
+            return structure;
+        }
+
+        function handleFileDragStart(event) {
+            const name = event.currentTarget.dataset.fileName;
+            if (!name) return;
+            event.dataTransfer.setData('text/plain', name);
+            event.dataTransfer.effectAllowed = 'move';
+        }
+
+        function bindFolderDropTarget(element, pathOverride) {
+            if (!element) return;
+            const targetPath = pathOverride !== undefined ? pathOverride : (element.dataset.path || '');
+
+            element.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                element.classList.add('drag-over');
+                event.dataTransfer.dropEffect = 'move';
+            });
+
+            element.addEventListener('dragleave', () => {
+                element.classList.remove('drag-over');
+            });
+
+            element.addEventListener('drop', (event) => {
+                event.preventDefault();
+                element.classList.remove('drag-over');
+                const fileName = event.dataTransfer.getData('text/plain');
+                if (!fileName) return;
+                if (targetPath === currentPath) {
+                    showStatus('File is already in that folder.', 'error');
+                    return;
+                }
+                moveFileToPath(fileName, targetPath);
+            });
+        }
+
+        function moveFileToPath(fileName, toPath) {
+            const formData = new FormData();
+            formData.append('action', 'move');
+            formData.append('fromPath', currentPath);
+            formData.append('toPath', toPath);
+            formData.append('file', fileName);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStatus('File moved successfully!', 'success');
+                    loadFiles();
+                } else {
+                    showStatus(data.message || 'Failed to move file', 'error');
+                }
+            })
+            .catch(() => {
+                showStatus('Failed to move file', 'error');
+            });
+        }
+
+        function moveSelectedFile() {
+            if (!selectedFile) return;
+
+            const target = document.getElementById('moveTargetSelect');
+            if (!target) return;
+
+            const toPath = target.value;
+            if (toPath === currentPath) {
+                showStatus('File is already in that folder.', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'move');
+            formData.append('fromPath', currentPath);
+            formData.append('toPath', toPath);
+            formData.append('file', selectedFile.name);
+
+            fetch('../php/media-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    closeModal('fileDetailsModal');
+                    showStatus('File moved successfully!', 'success');
+                    loadFiles();
+                } else {
+                    showStatus(data.message || 'Failed to move file', 'error');
+                }
+            })
+            .catch(() => {
+                showStatus('Failed to move file', 'error');
+            });
+        }
+
+        // Modal handling
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Status messages
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status-message ' + type;
+            statusDiv.style.display = 'block';
+
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', checkSession);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

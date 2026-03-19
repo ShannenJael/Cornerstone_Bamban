@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Usher Card Report - View and export visitor cards at Cornerstone Baptist Church.">
+    <title>Usher Card Report | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+    <style>
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-teal);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons .btn {
+            padding: 10px 20px;
+        }
+
+        .export-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+
+        .btn-export {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pdf {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-pdf:hover {
+            background: #c82333;
+        }
+
+        .btn-csv {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-csv:hover {
+            background: #218838;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .results-count {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .cards-table {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .cards-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cards-table th {
+            background: var(--primary-green);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .cards-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .cards-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .cards-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-first-time {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-military {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-follow-up {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .badge-new-resident {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badges-cell {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .view-btn {
+            background: var(--primary-teal);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .view-btn:hover {
+            background: var(--primary-green);
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-left: 5px;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Modal for viewing card details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-teal);
+        }
+
+        .modal-header h3 {
+            color: var(--primary-green);
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .detail-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            width: 40%;
+        }
+
+        .detail-value {
+            color: #666;
+            width: 60%;
+        }
+
+        @media (max-width: 768px) {
+            .filter-row {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .export-section {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 15px;
+            }
+
+            .cards-table {
+                overflow-x: auto;
+            }
+
+            .cards-table table {
+                min-width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="menu-label">Menu</span>
+                </button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Usher Card Report</h1>
+            <p>View and export visitor card records</p>
+        </div>
+    </section>
+
+    <!-- Report Content -->
+    <section class="ministry-single-content">
+        <div class="container">
+            <div class="report-container">
+                <a href="ushers-help.php" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Ushers Help
+                </a>
+
+                <!-- Filters -->
+                <div class="filter-section">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label for="dateRange">Date Range</label>
+                            <select id="dateRange" onchange="filterCards()">
+                                <option value="all">All Time</option>
+                                <option value="1month" selected>Last 1 Month</option>
+                                <option value="3months">Last 3 Months</option>
+                                <option value="1year">Last 1 Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" id="customStartGroup" style="display: none;">
+                            <label for="customStart">Start Date</label>
+                            <input type="date" id="customStart" onchange="filterCards()">
+                        </div>
+                        <div class="filter-group" id="customEndGroup" style="display: none;">
+                            <label for="customEnd">End Date</label>
+                            <input type="date" id="customEnd" onchange="filterCards()">
+                        </div>
+                        <div class="filter-group">
+                            <label for="filterType">Filter By</label>
+                            <select id="filterType" onchange="filterCards()">
+                                <option value="all">All Visitors</option>
+                                <option value="firstTime">First-Time Guests</option>
+                                <option value="military">Active Military</option>
+                                <option value="followUp">Requested Follow-Up</option>
+                                <option value="newResident">New Residents</option>
+                            </select>
+                        </div>
+                        <div class="export-section">
+                            <button class="btn-export btn-pdf" onclick="exportPDF()">
+                                <i class="fas fa-file-pdf"></i> Export PDF
+                            </button>
+                            <button class="btn-export btn-csv" onclick="exportCSV()">
+                                <i class="fas fa-file-csv"></i> Export CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Info -->
+                <div class="results-info">
+                    <span class="results-count" id="resultsCount">Loading...</span>
+                    <a href="usher-card.html" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Card
+                    </a>
+                </div>
+
+                <!-- Cards Table -->
+                <div class="cards-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Service</th>
+                                <th>Tags</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cardsTableBody">
+                            <!-- Cards will be loaded here -->
+                        </tbody>
+                    </table>
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <h3>No visitor cards found</h3>
+                        <p>Try adjusting your filters or add a new visitor card.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Detail Modal -->
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-id-card"></i> Visitor Card Details</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="cardDetails">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const STORAGE_KEY = 'calvary_usher_cards';
+        let allCards = [];
+        let filteredCards = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCards();
+            setupCustomDateToggle();
+        });
+
+        function loadCards() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            if (data) {
+                try {
+                    const parsed = JSON.parse(data);
+                    allCards = parsed.cards || [];
+                    // Sort by date, newest first
+                    allCards.sort((a, b) => new Date(b.visitDate || b.timestamp) - new Date(a.visitDate || a.timestamp));
+                } catch (e) {
+                    console.error('Error parsing cards:', e);
+                    allCards = [];
+                }
+            }
+            filterCards();
+        }
+
+        function setupCustomDateToggle() {
+            document.getElementById('dateRange').addEventListener('change', function() {
+                const isCustom = this.value === 'custom';
+                document.getElementById('customStartGroup').style.display = isCustom ? 'block' : 'none';
+                document.getElementById('customEndGroup').style.display = isCustom ? 'block' : 'none';
+            });
+        }
+
+        function filterCards() {
+            const dateRange = document.getElementById('dateRange').value;
+            const filterType = document.getElementById('filterType').value;
+            const now = new Date();
+
+            filteredCards = allCards.filter(card => {
+                const cardDate = new Date(card.visitDate || card.timestamp);
+
+                // Date filter
+                let passesDateFilter = true;
+                if (dateRange === '1month') {
+                    const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+                    passesDateFilter = cardDate >= oneMonthAgo;
+                } else if (dateRange === '3months') {
+                    const threeMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
+                    passesDateFilter = cardDate >= threeMonthsAgo;
+                } else if (dateRange === '1year') {
+                    const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+                    passesDateFilter = cardDate >= oneYearAgo;
+                } else if (dateRange === 'custom') {
+                    const startDate = document.getElementById('customStart').value;
+                    const endDate = document.getElementById('customEnd').value;
+                    if (startDate) passesDateFilter = cardDate >= new Date(startDate);
+                    if (endDate && passesDateFilter) passesDateFilter = cardDate <= new Date(endDate + 'T23:59:59');
+                }
+
+                // Type filter
+                let passesTypeFilter = true;
+                if (filterType === 'firstTime') {
+                    passesTypeFilter = card.firstTimeGuest;
+                } else if (filterType === 'military') {
+                    passesTypeFilter = card.activeMilitary;
+                } else if (filterType === 'followUp') {
+                    passesTypeFilter = card.visitFromPastor || card.knowMoreAboutChurch || card.becomeChristian;
+                } else if (filterType === 'newResident') {
+                    passesTypeFilter = card.newResident;
+                }
+
+                return passesDateFilter && passesTypeFilter;
+            });
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const tbody = document.getElementById('cardsTableBody');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            resultsCount.textContent = `Showing ${filteredCards.length} of ${allCards.length} cards`;
+
+            if (filteredCards.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            tbody.innerHTML = filteredCards.map((card, index) => {
+                const badges = [];
+                if (card.firstTimeGuest) badges.push('<span class="badge badge-first-time">First Time</span>');
+                if (card.activeMilitary) badges.push('<span class="badge badge-military">Military</span>');
+                if (card.newResident) badges.push('<span class="badge badge-new-resident">New Resident</span>');
+                if (card.visitFromPastor || card.becomeChristian || card.knowMoreAboutChurch) {
+                    badges.push('<span class="badge badge-follow-up">Follow-Up</span>');
+                }
+
+                const displayDate = card.visitDate ? new Date(card.visitDate).toLocaleDateString() :
+                                    new Date(card.timestamp).toLocaleDateString();
+
+                return `
+                    <tr>
+                        <td>${displayDate}</td>
+                        <td>${card.title ? card.title + ' ' : ''}${card.visitorName || 'Unknown'}</td>
+                        <td>${card.phone || '-'}</td>
+                        <td>${card.email1 || '-'}</td>
+                        <td>${card.serviceTime || '-'}</td>
+                        <td class="badges-cell">${badges.join('') || '-'}</td>
+                        <td>
+                            <button class="view-btn" onclick="viewCard('${card.id}')">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="delete-btn" onclick="deleteCard('${card.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function viewCard(cardId) {
+            const card = allCards.find(c => c.id === cardId);
+            if (!card) return;
+
+            const details = document.getElementById('cardDetails');
+
+            let childrenHtml = '';
+            if (card.children && card.children.length > 0) {
+                childrenHtml = card.children.map(c => `${c.name} (Age: ${c.age || 'N/A'})`).join(', ');
+            }
+
+            details.innerHTML = `
+                <div class="detail-row">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value">${card.title ? card.title + ' ' : ''}${card.visitorName || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date of Visit:</span>
+                    <span class="detail-value">${card.visitDate ? new Date(card.visitDate).toLocaleDateString() : '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Service:</span>
+                    <span class="detail-value">${card.serviceTime || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Age:</span>
+                    <span class="detail-value">${card.age || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Address:</span>
+                    <span class="detail-value">${formatAddress(card)}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value">${card.phone || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">${card.email1 || '-'}${card.email2 ? ', ' + card.email2 : ''}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">First-Time Guest:</span>
+                    <span class="detail-value">${card.firstTimeGuest ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">New Resident:</span>
+                    <span class="detail-value">${card.newResident ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Active Military:</span>
+                    <span class="detail-value">${card.activeMilitary ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Wants to become a Christian:</span>
+                    <span class="detail-value">${card.becomeChristian ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Wants more info about church:</span>
+                    <span class="detail-value">${card.knowMoreAboutChurch ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Wants visit from Pastor:</span>
+                    <span class="detail-value">${card.visitFromPastor ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Visiting Area:</span>
+                    <span class="detail-value">${card.visitingArea ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Guest Of:</span>
+                    <span class="detail-value">${card.guestOf || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Sunday School Class:</span>
+                    <span class="detail-value">${card.sundaySchoolClass || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Children:</span>
+                    <span class="detail-value">${childrenHtml || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Entered By:</span>
+                    <span class="detail-value">${card.usherName || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Notes:</span>
+                    <span class="detail-value">${card.notes || '-'}</span>
+                </div>
+            `;
+
+            document.getElementById('cardModal').classList.add('active');
+        }
+
+        function formatAddress(card) {
+            const parts = [];
+            if (card.streetAddress) parts.push(card.streetAddress);
+            if (card.apartment) parts.push('Apt ' + card.apartment);
+            if (card.city) parts.push(card.city);
+            if (card.state) parts.push(card.state);
+            if (card.zip) parts.push(card.zip);
+            return parts.join(', ') || '-';
+        }
+
+        function closeModal() {
+            document.getElementById('cardModal').classList.remove('active');
+        }
+
+        function deleteCard(cardId) {
+            if (!confirm('Are you sure you want to delete this visitor card?')) return;
+
+            allCards = allCards.filter(c => c.id !== cardId);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ cards: allCards }));
+            filterCards();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('cardModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        function exportPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Title
+            doc.setFontSize(18);
+            doc.text('Cornerstone Baptist Church - Visitor Cards Report', 14, 22);
+
+            doc.setFontSize(10);
+            doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 30);
+            doc.text(`Total Records: ${filteredCards.length}`, 14, 36);
+
+            // Table
+            const tableData = filteredCards.map(card => [
+                card.visitDate ? new Date(card.visitDate).toLocaleDateString() : '-',
+                (card.title ? card.title + ' ' : '') + (card.visitorName || '-'),
+                card.phone || '-',
+                card.email1 || '-',
+                card.serviceTime || '-',
+                [
+                    card.firstTimeGuest ? 'First Time' : '',
+                    card.activeMilitary ? 'Military' : '',
+                    card.newResident ? 'New Resident' : '',
+                    (card.visitFromPastor || card.becomeChristian || card.knowMoreAboutChurch) ? 'Follow-Up' : ''
+                ].filter(Boolean).join(', ') || '-'
+            ]);
+
+            doc.autoTable({
+                startY: 42,
+                head: [['Date', 'Name', 'Phone', 'Email', 'Service', 'Tags']],
+                body: tableData,
+                styles: { fontSize: 8 },
+                headStyles: { fillColor: [0, 51, 102] }
+            });
+
+            doc.save('visitor-cards-report.pdf');
+        }
+
+        function exportCSV() {
+            const headers = [
+                'Date', 'Title', 'Name', 'Age', 'Street Address', 'Apartment', 'City', 'State', 'Zip',
+                'Phone', 'Email 1', 'Email 2', 'Service', 'First-Time Guest', 'New Resident',
+                'Active Military', 'Become Christian', 'Know More', 'Visit from Pastor',
+                'Visiting Area', 'Guest Of', 'Sunday School Class', 'Children', 'Usher', 'Notes'
+            ];
+
+            const rows = filteredCards.map(card => {
+                const children = card.children ? card.children.map(c => `${c.name} (${c.age || 'N/A'})`).join('; ') : '';
+                return [
+                    card.visitDate || '',
+                    card.title || '',
+                    card.visitorName || '',
+                    card.age || '',
+                    card.streetAddress || '',
+                    card.apartment || '',
+                    card.city || '',
+                    card.state || '',
+                    card.zip || '',
+                    card.phone || '',
+                    card.email1 || '',
+                    card.email2 || '',
+                    card.serviceTime || '',
+                    card.firstTimeGuest ? 'Yes' : 'No',
+                    card.newResident ? 'Yes' : 'No',
+                    card.activeMilitary ? 'Yes' : 'No',
+                    card.becomeChristian ? 'Yes' : 'No',
+                    card.knowMoreAboutChurch ? 'Yes' : 'No',
+                    card.visitFromPastor ? 'Yes' : 'No',
+                    card.visitingArea ? 'Yes' : 'No',
+                    card.guestOf || '',
+                    card.sundaySchoolClass || '',
+                    children,
+                    card.usherName || '',
+                    card.notes || ''
+                ];
+            });
+
+            let csv = headers.map(h => `"${h}"`).join(',') + '\n';
+            rows.forEach(row => {
+                csv += row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'visitor-cards-report.csv';
+            link.click();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

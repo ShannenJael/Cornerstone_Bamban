@@ -1,0 +1,612 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Missions Admin | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #14AFB1 0%, #0d8a8c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .admin-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .admin-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .admin-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .admin-body {
+            padding: 30px;
+        }
+
+        /* Login Form */
+        .login-form {
+            display: block;
+        }
+
+        .login-form.hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #14AFB1;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #14AFB1 0%, #0d8a8c 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(20, 175, 177, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        /* Upload Form */
+        .upload-form {
+            display: none;
+        }
+
+        .upload-form.active {
+            display: block;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button-group .btn {
+            flex: 1;
+        }
+
+        /* Messages */
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Current Letter Preview */
+        .current-letter {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .current-letter h4 {
+            color: #14AFB1;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .current-letter .letter-preview {
+            font-size: 0.9rem;
+            color: #666;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .current-letter .letter-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, #f8f9fa);
+        }
+
+        .current-letter .no-letter {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Back link */
+        .back-link {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .back-link a {
+            color: #14AFB1;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Logged in indicator */
+        .logged-in-as {
+            background: #e8f8f8;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #0d8a8c;
+        }
+
+        .logged-in-as i {
+            margin-right: 8px;
+        }
+
+        .logout-btn {
+            float: right;
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .logout-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Character count */
+        .char-count {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church">
+            <h1>Missions Admin</h1>
+            <p>Missionary Letter Management</p>
+        </div>
+
+        <div class="admin-body">
+            <!-- Login Form -->
+            <div class="login-form" id="loginForm">
+                <div class="message error" id="loginError">
+                    <i class="fas fa-exclamation-circle"></i> Invalid username or password
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+            </div>
+
+            <!-- Upload Form (shown after login) -->
+            <div class="upload-form" id="uploadForm">
+                <div class="logged-in-as">
+                    <i class="fas fa-user-check"></i> Logged in as <strong id="loggedInUser">Staff</strong>
+                    <button class="logout-btn" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <div class="message success" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Missionary letter updated successfully!
+                </div>
+
+                <div class="message error" id="uploadError">
+                    <i class="fas fa-exclamation-circle"></i> <span id="uploadErrorText">Error saving letter</span>
+                </div>
+
+                <div class="current-letter" id="currentLetterPreview">
+                    <h4><i class="fas fa-envelope-open"></i> Current Letter</h4>
+                    <div class="letter-preview" id="letterPreviewText">
+                        <span class="no-letter">No letter currently posted</span>
+                    </div>
+                </div>
+
+                <form onsubmit="handleUpload(event)">
+                    <div class="form-group">
+                        <label for="missionaryName"><i class="fas fa-user"></i> Missionary Name</label>
+                        <input type="text" id="missionaryName" name="missionaryName" placeholder="e.g., John & Jane Smith" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <input type="text" id="location" name="location" placeholder="e.g., Lima, Peru" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="letterDate"><i class="fas fa-calendar"></i> Letter Date</label>
+                        <input type="text" id="letterDate" name="letterDate" placeholder="e.g., January 26, 2026" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="letterPdf"><i class="fas fa-file-pdf"></i> Upload PDF (optional)</label>
+                        <input type="file" id="letterPdf" name="letterPdf" accept="application/pdf">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="letterContent"><i class="fas fa-pen"></i> Letter Content</label>
+                        <textarea id="letterContent" name="letterContent" placeholder="Paste or type the missionary letter here (optional if PDF uploaded)..." oninput="updateCharCount()"></textarea>
+                        <div class="char-count"><span id="charCount">0</span> characters</div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Letter
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="missions.html"><i class="fas fa-arrow-left"></i> Back to Missions Page</a>
+        </div>
+    </div>
+
+    <script>
+        // Simple session management using localStorage
+        // NOTE: For production, you should use server-side authentication with PHP sessions
+
+        const SESSION_KEY = 'missions_admin_session';
+        const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+
+        function checkSession() {
+            const session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                const sessionData = JSON.parse(session);
+                if (Date.now() < sessionData.expires) {
+                    showUploadForm(sessionData.username);
+                    loadCurrentLetter();
+                    return true;
+                } else {
+                    localStorage.removeItem(SESSION_KEY);
+                }
+            }
+            return false;
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Send to PHP for authentication
+            const formData = new FormData();
+            formData.append('action', 'login');
+            formData.append('username', username);
+            formData.append('password', password);
+
+            fetch('../php/missions-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Save session
+                    localStorage.setItem(SESSION_KEY, JSON.stringify({
+                        username: username,
+                        expires: Date.now() + SESSION_DURATION
+                    }));
+                    showUploadForm(username);
+                    loadCurrentLetter();
+                    document.getElementById('loginError').classList.remove('show');
+                } else {
+                    document.getElementById('loginError').classList.add('show');
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                document.getElementById('loginError').classList.add('show');
+            });
+        }
+
+        function handleLogout() {
+            localStorage.removeItem(SESSION_KEY);
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('uploadForm').classList.remove('active');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function showUploadForm(username) {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('uploadForm').classList.add('active');
+            document.getElementById('loggedInUser').textContent = username;
+        }
+
+        function updateLetterPreview(data) {
+            if (data && (data.content || data.pdfFile)) {
+                if (data.pdfFile) {
+                    document.getElementById('letterPreviewText').innerHTML =
+                        '<strong style="color: #14AFB1;"><i class="fas fa-file-pdf"></i> PDF uploaded:</strong> ' + data.pdfFile;
+                } else {
+                    document.getElementById('letterPreviewText').innerHTML =
+                        '<strong>' + data.missionaryName + '</strong> - ' + data.date + '<br>' +
+                        data.content.substring(0, 150) + '...';
+                }
+
+                // Pre-fill the form
+                document.getElementById('missionaryName').value = data.missionaryName || '';
+                document.getElementById('location').value = data.location || '';
+                document.getElementById('letterDate').value = data.date || '';
+                document.getElementById('letterContent').value = data.content || '';
+                updateCharCount();
+            } else {
+                document.getElementById('letterPreviewText').innerHTML =
+                    '<span class="no-letter">No letter currently posted</span>';
+            }
+        }
+
+        function loadCurrentLetter() {
+            fetch('../data/missionary-letter.json?t=' + Date.now())
+                .then(response => {
+                    if (!response.ok) throw new Error('No letter');
+                    return response.json();
+                })
+                .then(data => {
+                    updateLetterPreview(data);
+                })
+                .catch(error => {
+                    console.log('No current letter');
+                });
+        }
+
+        function handleUpload(event) {
+            event.preventDefault();
+
+            const session = localStorage.getItem(SESSION_KEY);
+            if (!session) {
+                handleLogout();
+                return;
+            }
+
+            const pdfFile = document.getElementById('letterPdf').files[0] || null;
+            const letterData = {
+                missionaryName: document.getElementById('missionaryName').value,
+                location: document.getElementById('location').value,
+                date: document.getElementById('letterDate').value,
+                content: document.getElementById('letterContent').value
+            };
+
+            // Debug: Log what's being submitted
+            console.log('Submitting letter data:', letterData);
+            console.log('PDF file selected:', pdfFile ? pdfFile.name + ' (' + pdfFile.size + ' bytes)' : 'None');
+
+            const formData = new FormData();
+            formData.append('action', 'save');
+            formData.append('data', JSON.stringify(letterData));
+            if (pdfFile) {
+                formData.append('letterPdf', pdfFile);
+                console.log('PDF appended to form data');
+            }
+
+            fetch('../php/missions-handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+                if (data.success) {
+                    // Show success message with PDF info if applicable
+                    const successMsg = document.getElementById('successMessage');
+                    if (data.data && data.data.pdfFile) {
+                        successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Letter saved with PDF: ' + data.data.pdfFile;
+                    } else {
+                        successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Missionary letter updated successfully!';
+                    }
+                    successMsg.classList.add('show');
+                    document.getElementById('uploadError').classList.remove('show');
+
+                    // Clear the file input after successful upload
+                    document.getElementById('letterPdf').value = '';
+
+                    // Update the preview immediately using the returned data
+                    if (data.data) {
+                        updateLetterPreview(data.data);
+                    } else {
+                        // Fallback to fetching if data not returned
+                        loadCurrentLetter();
+                    }
+
+                    setTimeout(() => {
+                        document.getElementById('successMessage').classList.remove('show');
+                    }, 3000);
+                } else {
+                    document.getElementById('uploadErrorText').textContent = data.message || 'Error saving letter';
+                    document.getElementById('uploadError').classList.add('show');
+                }
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                document.getElementById('uploadErrorText').textContent = 'Network error. Please try again.';
+                document.getElementById('uploadError').classList.add('show');
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('missionaryName').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('letterDate').value = '';
+            document.getElementById('letterContent').value = '';
+            document.getElementById('letterPdf').value = '';
+            updateCharCount();
+        }
+
+        function updateCharCount() {
+            const count = document.getElementById('letterContent').value.length;
+            document.getElementById('charCount').textContent = count.toLocaleString();
+        }
+
+        // Check session on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSession();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to know for certain you are going to Heaven - Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac.">
+    <title>Heaven | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .heaven-qr-section {
+            padding: 40px 0 10px;
+            text-align: center;
+        }
+
+        .heaven-qr-section h3 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .heaven-qr-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .heaven-qr-box {
+            position: relative;
+            width: 240px;
+            height: 240px;
+        }
+
+        #heavenQr canvas,
+        #heavenQr img {
+            width: 240px;
+            height: 240px;
+        }
+
+        .heaven-qr-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 96px;
+            height: 96px;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 6px;
+            box-sizing: border-box;
+            object-fit: contain;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar (Logo Only - FBC Hammond Style) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+    <a href="../index.html">
+        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+    </a>
+</div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+    <span class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    <span class="menu-label">Menu</span>
+</button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header page-header-heaven">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Heaven</h1>
+            <p>The Most Important Decision You'll Ever Make</p>
+        </div>
+    </section>
+
+    <!-- Salvation Content -->
+    <section class="salvation-content">
+        <div class="container">
+            <div class="salvation-intro-wrapper">
+                <div class="salvation-intro-text">
+                    <h2>You can know 100% for sure that you will spend eternity in Heaven.</h2>
+                    <div class="divider"></div>
+                    <p class="lead">We would like to share some good news with you. God loves you so much that He made a way for you to go to Heaven when you die. The Bible clearly teaches us that we can know 100% for certain that we are going to Heaven someday. Going to Heaven does not require you to find the right religion, go to church, give to the poor, or live a life full of good works. Doing good things is important, but our good works cannot get us into Heaven, because it is not a lack of good works that is keeping us out of Heaven, it is our sin. Consider the following helpful truths from the Bible that teach us how we can know for sure that we will go to Heaven when we die. God loves you, and He wants you to go to Heaven someday!</p>
+                </div>
+            </div>
+
+            <div class="salvation-steps">
+                <div class="salvation-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Recognize That You Are a Sinner</h3>
+                        <p>The Bible tells us that all people have sinned and fallen short of God's perfect standard.</p>
+                        <blockquote class="scripture">
+                            "For all have sinned, and come short of the glory of God."
+                            <cite>Romans 3:23</cite>
+                        </blockquote>
+                        <p>Sin is anything we think, say, or do that goes against God's will. Because God is holy and perfect, even one sin separates us from Him.</p>
+                    </div>
+                </div>
+
+                <div class="salvation-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Understand the Penalty for Sin</h3>
+                        <p>Sin has a consequence - eternal separation from God in a place called Hell.</p>
+                        <blockquote class="scripture">
+                            "For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord."
+                            <cite>Romans 6:23</cite>
+                        </blockquote>
+                        <p>Just as an employee earns wages for work, we have earned death (eternal separation from God) through our sin. But notice the good news - God offers a gift!</p>
+                    </div>
+                </div>
+
+                <div class="salvation-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Know That God Loves You</h3>
+                        <p>Despite our sin, God loves us and made a way for us to be saved.</p>
+                        <blockquote class="scripture">
+                            "But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us."
+                            <cite>Romans 5:8</cite>
+                        </blockquote>
+                        <p>God demonstrated His incredible love by sending Jesus Christ to die on the cross for our sins - while we were still sinners! He didn't wait for us to clean up our lives first.</p>
+                    </div>
+                </div>
+
+                <div class="salvation-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Believe and Receive Christ</h3>
+                        <p>Salvation is received by faith - simply believing in Jesus Christ and trusting Him alone for your salvation.</p>
+                        <blockquote class="scripture">
+                            "That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved."
+                            <cite>Romans 10:9</cite>
+                        </blockquote>
+                        <blockquote class="scripture">
+                            "For whosoever shall call upon the name of the Lord shall be saved."
+                            <cite>Romans 10:13</cite>
+                        </blockquote>
+                        <p>Salvation is not about religion, church membership, good works, or being a good person. It's about trusting in Jesus Christ alone - His death, burial, and resurrection - to save you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="salvation-prayer">
+                <h3>Would You Like to Receive Christ Today?</h3>
+                <p>If you understand that you are a sinner and believe that Jesus Christ died for your sins and rose again, you can receive Him right now by faith through prayer. Prayer is simply talking to God. Here's a prayer you can pray:</p>
+                <div class="prayer-box">
+                    <p><em>"Dear God, I know that I am a sinner. I believe that Jesus Christ died on the cross for my sins and rose again. Right now, I trust Jesus Christ alone as my Savior. Thank you for saving me. In Jesus' name, Amen."</em></p>
+                </div>
+                <p>If you prayed that prayer and meant it from your heart, you are now a child of God! The Bible promises:</p>
+                <blockquote class="scripture">
+                    "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast."
+                    <cite>Ephesians 2:8-9</cite>
+                </blockquote>
+            </div>
+
+            <section class="salvation-videos">
+                <div class="container">
+                    <div class="salvation-videos-grid">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/7F_Bbjfe4gE" width="640" height="360" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="The Gospel Message"></iframe>
+                        </div>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/mIeRU12STNw" width="640" height="360" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Heaven Message"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Salvation Decision Form -->
+            <section class="salvation-decision-form">
+                <div class="container">
+                    <div class="decision-form-wrapper">
+                        <div class="decision-form-content">
+                            <h2>Did You Trust Christ Today?</h2>
+                            <p>If you have just trusted Christ as your Savior, we would love to know about your decision and to help you learn more about your new relationship with the Lord Jesus Christ!</p>
+                            <p>Fill out the form below and let us know today!</p>
+                        </div>
+                        <div class="decision-form-box">
+                            <div id="heaven-form-status" style="display: none; padding: 15px; margin-bottom: 20px; border-radius: 5px;"></div>
+                            <form id="heaven-form" class="salvation-form" action="send-email.php" method="POST">
+                                <!-- Honeypot field for spam protection - hidden from users -->
+                                <div style="position: absolute; left: -9999px;">
+                                    <input type="text" name="website" tabindex="-1" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="heaven-name">Name</label>
+                                    <input type="text" id="heaven-name" name="name" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="heaven-email">Email Address</label>
+                                    <input type="email" id="heaven-email" name="email" placeholder="Your Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="heaven-message">Message</label>
+                                    <textarea id="heaven-message" name="message" placeholder="Tell us about your decision or ask any questions..." rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-large btn-block" id="heaven-submit-btn">
+                                    <i class="fas fa-paper-plane"></i> Submit
+                                </button>
+                            </form>
+
+                            <script>
+                            document.getElementById('heaven-form').addEventListener('submit', function(e) {
+                                e.preventDefault();
+
+                                var form = this;
+                                var submitBtn = document.getElementById('heaven-submit-btn');
+                                var statusDiv = document.getElementById('heaven-form-status');
+                                var formData = new FormData(form);
+
+                                submitBtn.disabled = true;
+                                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+                                fetch('send-email.php', {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                .then(function(response) {
+                                    return response.json();
+                                })
+                                .then(function(data) {
+                                    statusDiv.style.display = 'block';
+                                    if (data.success) {
+                                        statusDiv.style.backgroundColor = '#d4edda';
+                                        statusDiv.style.color = '#155724';
+                                        statusDiv.style.border = '1px solid #c3e6cb';
+                                        statusDiv.textContent = data.message;
+                                        form.reset();
+                                    } else {
+                                        statusDiv.style.backgroundColor = '#f8d7da';
+                                        statusDiv.style.color = '#721c24';
+                                        statusDiv.style.border = '1px solid #f5c6cb';
+                                        statusDiv.textContent = data.message;
+                                    }
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                                })
+                                .catch(function(error) {
+                                    statusDiv.style.display = 'block';
+                                    statusDiv.style.backgroundColor = '#f8d7da';
+                                    statusDiv.style.color = '#721c24';
+                                    statusDiv.style.border = '1px solid #f5c6cb';
+                                    statusDiv.textContent = 'An error occurred. Please try again or call us directly.';
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                                });
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="salvation-next">
+                <h3>What's Next?</h3>
+                <p>If you made a decision to trust Christ today, we would love to hear from you and help you grow in your new faith!</p>
+                <div class="next-steps-grid">
+                    <div class="next-step-card">
+                        <i class="fas fa-bible"></i>
+                        <h4>Read Your Bible</h4>
+                        <p>Start with the Gospel of John to learn more about Jesus.</p>
+                    </div>
+                    <div class="next-step-card">
+                        <i class="fas fa-praying-hands"></i>
+                        <h4>Pray Daily</h4>
+                        <p>Talk to God every day - He wants to hear from you!</p>
+                    </div>
+                    <div class="next-step-card">
+                        <i class="fas fa-church"></i>
+                        <h4>Join a Church</h4>
+                        <p>Find a Bible-believing church where you can grow and serve.</p>
+                    </div>
+                    <div class="next-step-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Tell Others</h4>
+                        <p>Share your decision with someone - we'd love to celebrate with you!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="salvation-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>We'd Love to Hear From You</h2>
+                <p>If you have questions or would like someone to talk to, please reach out to us!</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-large btn-white">Contact Us</a>
+                    <a href="visit.html" class="btn btn-large btn-outline-white">Plan Your Visit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heaven QR Code -->
+    <section class="heaven-qr-section">
+        <div class="container">
+            <h3>Scan to Open This Page</h3>
+            <p>Use your phone camera to view this page quickly.</p>
+            <div class="heaven-qr-wrap">
+                <div class="heaven-qr-box" id="heavenQrBox">
+                    <div id="heavenQr" aria-label="Heaven Page QR Code"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li></ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="../js/pwa-install.js"></script>
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registered: ', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderHeavenQr();
+        });
+
+        function renderHeavenQr() {
+            const qrContainer = document.getElementById('heavenQr');
+            const qrBox = document.getElementById('heavenQrBox');
+            if (!qrContainer || typeof QRCode === 'undefined') return;
+
+            const pageUrl = (window.location.origin && window.location.origin !== 'null')
+                ? `${window.location.origin}/pages/heaven.html`
+                : window.location.href;
+            qrContainer.innerHTML = '';
+
+            new QRCode(qrContainer, {
+                text: pageUrl,
+                width: 240,
+                height: 240,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            if (qrBox) {
+                const existingLogo = qrBox.querySelector('.heaven-qr-logo');
+                if (existingLogo) existingLogo.remove();
+                const logoImg = document.createElement('img');
+                logoImg.className = 'heaven-qr-logo';
+                logoImg.alt = 'Cornerstone Baptist Church Logo';
+                logoImg.src = '/pages/images/Circle Logo Black.png?v=1';
+                qrBox.appendChild(logoImg);
+            }
+
+            const tryDraw = (attemptsLeft) => {
+                const canvas = qrContainer.querySelector('canvas');
+                if (!canvas) {
+                    if (attemptsLeft > 0) setTimeout(() => tryDraw(attemptsLeft - 1), 60);
+                    return;
+                }
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                const logo = new Image();
+                logo.onload = function() {
+                    const logoSize = Math.round(canvas.width * 0.40);
+                    const padding = Math.round(logoSize * 0.08);
+                    const x = Math.round((canvas.width - logoSize) / 2);
+                    const y = Math.round((canvas.height - logoSize) / 2);
+
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = logo.width;
+                    tempCanvas.height = logo.height;
+                    const tempCtx = tempCanvas.getContext('2d');
+                    if (!tempCtx) return;
+                    tempCtx.drawImage(logo, 0, 0);
+
+                    const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+                    const data = imageData.data;
+                    for (let i = 0; i < data.length; i += 4) {
+                        if (data[i + 3] > 0) {
+                            data[i] = 0;
+                            data[i + 1] = 0;
+                            data[i + 2] = 0;
+                        }
+                    }
+                    tempCtx.putImageData(imageData, 0, 0);
+
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(x - padding, y - padding, logoSize + (padding * 2), logoSize + (padding * 2));
+                    ctx.drawImage(tempCanvas, x, y, logoSize, logoSize);
+                };
+                logo.src = '/pages/images/Circle Logo Black.png?v=1';
+            };
+
+            tryDraw(5);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

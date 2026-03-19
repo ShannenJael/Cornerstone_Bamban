@@ -1,0 +1,739 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Usher Card Entry - Enter visitor card information at Cornerstone Baptist Church.">
+    <title>Usher Card Entry | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-teal);
+        }
+
+        .form-header h2 {
+            color: var(--primary-green);
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: #666;
+            font-style: italic;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .form-section h3 {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(20, 175, 177, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-teal);
+        }
+
+        .checkbox-item label {
+            font-weight: normal;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .children-section .child-row {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: end;
+        }
+
+        .children-section .child-row label {
+            font-size: 0.85rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .form-actions .btn {
+            padding: 12px 35px;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-teal);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .form-row.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+            }
+
+            .children-section .child-row {
+                grid-template-columns: 1fr 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="menu-label">Menu</span>
+                </button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Usher Card Entry</h1>
+            <p>Enter visitor card information</p>
+        </div>
+    </section>
+
+    <!-- Form Content -->
+    <section class="ministry-single-content">
+        <div class="container">
+            <a href="ushers-help.php" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Ushers Help
+            </a>
+
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-id-card"></i> Getting to Know You</h2>
+                    <p>Welcome to Cornerstone Baptist Church!</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Visitor card saved successfully!
+                </div>
+
+                <form id="usherCardForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Visitor Information</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <select id="title" name="title">
+                                    <option value="">Select...</option>
+                                    <option value="Mr.">Mr.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Ms.">Ms.</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Dr.">Dr.</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorName">Full Name *</label>
+                                <input type="text" id="visitorName" name="visitorName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label for="visitDate">Date of Visit *</label>
+                                <input type="date" id="visitDate" name="visitDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceTime">Service</label>
+                                <select id="serviceTime" name="serviceTime">
+                                    <option value="">Select...</option>
+                                    <option value="Sunday School">Sunday School (9:15 AM)</option>
+                                    <option value="Sunday Morning">Sunday Morning (10:30 AM)</option>
+                                    <option value="Sunday Evening">Sunday Evening (6:00 PM)</option>
+                                    <option value="Wednesday Evening">Wednesday Evening (7:00 PM)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="0" max="120">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+
+                        <div class="form-group">
+                            <label for="streetAddress">Street Address</label>
+                            <input type="text" id="streetAddress" name="streetAddress">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="apartment">Apartment Number</label>
+                                <input type="text" id="apartment" name="apartment">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city">
+                            </div>
+                        </div>
+
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" value="FL">
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Zip Code</label>
+                                <input type="text" id="zip" name="zip">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email1">Email</label>
+                                <input type="email" id="email1" name="email1">
+                            </div>
+                            <div class="form-group">
+                                <label for="email2">Alternate Email</label>
+                                <input type="email" id="email2" name="email2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visitor Type -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-check-square"></i> Please Check All Applicable</h3>
+
+                        <div class="checkbox-group" style="margin-bottom: 20px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="firstTimeGuest" name="firstTimeGuest">
+                                <label for="firstTimeGuest">First-time Guest</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="newResident" name="newResident">
+                                <label for="newResident">New Resident</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="activeMilitary" name="activeMilitary">
+                                <label for="activeMilitary">Active Military</label>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="becomeChristian" name="becomeChristian">
+                                <label for="becomeChristian">I would like to know how to become a Christian</label>
+                            </div>
+                        </div>
+                        <div class="checkbox-group" style="margin-top: 10px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="knowMoreAboutChurch" name="knowMoreAboutChurch">
+                                <label for="knowMoreAboutChurch">I would like to know more about Cornerstone Baptist Church</label>
+                            </div>
+                        </div>
+                        <div class="checkbox-group" style="margin-top: 10px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="visitFromPastor" name="visitFromPastor">
+                                <label for="visitFromPastor">I would like a visit from the Pastor</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Out of Town Guests -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-plane"></i> Out of Town Guests</h3>
+
+                        <div class="checkbox-group" style="margin-bottom: 15px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="visitingArea" name="visitingArea">
+                                <label for="visitingArea">I am visiting the Bamban area</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestOf">I am a guest of</label>
+                                <input type="text" id="guestOf" name="guestOf" placeholder="Member's name">
+                            </div>
+                            <div class="form-group">
+                                <label for="sundaySchoolClass">Sunday School Class Visited</label>
+                                <input type="text" id="sundaySchoolClass" name="sundaySchoolClass">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Children -->
+                    <div class="form-section children-section">
+                        <h3><i class="fas fa-child"></i> Children</h3>
+
+                        <div class="child-row">
+                            <div class="form-group">
+                                <label>Child 1 Name</label>
+                                <input type="text" name="child1Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" name="child1Age" min="0" max="18">
+                            </div>
+                        </div>
+
+                        <div class="child-row">
+                            <div class="form-group">
+                                <label>Child 2 Name</label>
+                                <input type="text" name="child2Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" name="child2Age" min="0" max="18">
+                            </div>
+                        </div>
+
+                        <div class="child-row">
+                            <div class="form-group">
+                                <label>Child 3 Name</label>
+                                <input type="text" name="child3Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" name="child3Age" min="0" max="18">
+                            </div>
+                        </div>
+
+                        <div class="child-row">
+                            <div class="form-group">
+                                <label>Child 4 Name</label>
+                                <input type="text" name="child4Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" name="child4Age" min="0" max="18">
+                            </div>
+                        </div>
+
+                        <div class="child-row">
+                            <div class="form-group">
+                                <label>Child 5 Name</label>
+                                <input type="text" name="child5Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" name="child5Age" min="0" max="18">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Usher Info -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user-tie"></i> Entered By</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="usherName">Usher Name</label>
+                                <input type="text" id="usherName" name="usherName">
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">Additional Notes</label>
+                                <input type="text" id="notes" name="notes" placeholder="Any additional information...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Card
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-eraser"></i> Clear Form
+                        </button>
+                        <a href="usher-report.html" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> View Cards
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const STORAGE_KEY = 'calvary_usher_cards';
+
+        // Set today's date as default
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('visitDate').value = today;
+
+            // Load saved usher name if available
+            const savedUsher = localStorage.getItem('calvary_usher_name');
+            if (savedUsher) {
+                document.getElementById('usherName').value = savedUsher;
+            }
+        });
+
+        // Form submission
+        document.getElementById('usherCardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const card = {
+                id: Date.now().toString(),
+                timestamp: new Date().toISOString(),
+                title: formData.get('title'),
+                visitorName: formData.get('visitorName'),
+                visitDate: formData.get('visitDate'),
+                serviceTime: formData.get('serviceTime'),
+                age: formData.get('age'),
+                streetAddress: formData.get('streetAddress'),
+                apartment: formData.get('apartment'),
+                city: formData.get('city'),
+                state: formData.get('state'),
+                zip: formData.get('zip'),
+                phone: formData.get('phone'),
+                email1: formData.get('email1'),
+                email2: formData.get('email2'),
+                firstTimeGuest: formData.get('firstTimeGuest') === 'on',
+                newResident: formData.get('newResident') === 'on',
+                activeMilitary: formData.get('activeMilitary') === 'on',
+                becomeChristian: formData.get('becomeChristian') === 'on',
+                knowMoreAboutChurch: formData.get('knowMoreAboutChurch') === 'on',
+                visitFromPastor: formData.get('visitFromPastor') === 'on',
+                visitingArea: formData.get('visitingArea') === 'on',
+                guestOf: formData.get('guestOf'),
+                sundaySchoolClass: formData.get('sundaySchoolClass'),
+                children: [],
+                usherName: formData.get('usherName'),
+                notes: formData.get('notes')
+            };
+
+            // Collect children data
+            for (let i = 1; i <= 5; i++) {
+                const childName = formData.get(`child${i}Name`);
+                const childAge = formData.get(`child${i}Age`);
+                if (childName) {
+                    card.children.push({ name: childName, age: childAge });
+                }
+            }
+
+            // Save to localStorage
+            saveCard(card);
+
+            // Save usher name for future use
+            if (card.usherName) {
+                localStorage.setItem('calvary_usher_name', card.usherName);
+            }
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+            setTimeout(() => successMsg.classList.remove('show'), 3000);
+
+            // Clear form except usher name
+            clearFormKeepUsher();
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function saveCard(card) {
+            let data = localStorage.getItem(STORAGE_KEY);
+            let parsed = data ? JSON.parse(data) : { cards: [] };
+            parsed.cards.push(card);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+
+        function clearForm() {
+            document.getElementById('usherCardForm').reset();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('visitDate').value = today;
+        }
+
+        function clearFormKeepUsher() {
+            const usherName = document.getElementById('usherName').value;
+            clearForm();
+            document.getElementById('usherName').value = usherName;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

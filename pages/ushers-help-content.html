@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ushers Help - Visitor Card Management at Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac.">
+    <title>Ushers Help | Cornerstone Baptist Church</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .ushers-intro {
+            background: #f5f5f5;
+            color: #222;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .ushers-intro h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .ushers-intro p {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-teal);
+        }
+
+        .action-card .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .action-card .card-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .action-card h4 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .action-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .action-card .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+        }
+
+        .quick-stats {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .quick-stats h4 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-item .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            display: block;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Attendance Counter Section */
+        .attendance-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .attendance-section h4 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .attendance-date-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .attendance-date-row label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .attendance-date-row input[type="date"] {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .attendance-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-teal);
+        }
+
+        .attendance-card h5 {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .attendance-card h5 i {
+            color: var(--primary-teal);
+        }
+
+        .count-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .count-row label {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .count-input {
+            width: 80px;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .count-input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(20, 175, 177, 0.1);
+        }
+
+        .count-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 2px solid #ddd;
+            margin-top: 5px;
+        }
+
+        .count-total label {
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .count-total .total-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+        }
+
+        .attendance-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .attendance-actions .btn {
+            padding: 12px 25px;
+        }
+
+        .attendance-history {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #eee;
+        }
+
+        .attendance-history h5 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .history-table th {
+            background: var(--primary-green);
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+        }
+
+        .history-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .history-table .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .history-table .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .success-toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .success-toast.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            .attendance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-table {
+                font-size: 0.8rem;
+            }
+
+            .history-table th, .history-table td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar (Logo Only - FBC Hammond Style) -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="menu-label">Menu</span>
+                </button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Ushers Help</h1>
+            <p>Visitor Card Management System</p>
+        </div>
+    </section>
+
+    <!-- Ushers Content -->
+    <section class="ministry-single-content" style="padding-top: 20px;">
+        <div class="container">
+            <div class="ushers-intro">
+                <h3><i class="fas fa-users"></i> Ushers</h3>
+                <p>At Cornerstone, we realize that every visitor is important. We want to keep a record of every visitor so we can follow up and welcome them into our church family. This page allows ushers to take the visitor card and enter the information into our database for record keeping and follow-up purposes.</p>
+            </div>
+
+            <div class="action-cards">
+                <div class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h4>Usher Card Update</h4>
+                    <p>Enter a new visitor card into the system. Fill out the visitor's information from the card they submitted during service.</p>
+                    <a href="usher-card.html" class="btn btn-primary">Enter Visitor Card</a>
+                </div>
+
+                <div class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4>Usher Card Report</h4>
+                    <p>View previously submitted visitor cards. Filter by date range and export to PDF or CSV for your records.</p>
+                    <a href="usher-report.html" class="btn btn-primary">View Reports</a>
+                </div>
+            </div>
+
+            <div class="quick-stats">
+                <h4><i class="fas fa-chart-bar"></i> Quick Statistics</h4>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCards">--</span>
+                        <div class="stat-label">Total Visitor Cards</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="thisMonth">--</span>
+                        <div class="stat-label">This Month</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="firstTime">--</span>
+                        <div class="stat-label">First-Time Guests</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="followUp">--</span>
+                        <div class="stat-label">Requested Follow-Up</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Attendance Counter -->
+            <div class="attendance-section">
+                <h4><i class="fas fa-clipboard-list"></i> Service Attendance Counter</h4>
+
+                <div class="attendance-date-row">
+                    <label for="attendanceDate">Date:</label>
+                    <input type="date" id="attendanceDate">
+                </div>
+
+                <div class="attendance-grid">
+                    <!-- Sunday Morning -->
+                    <div class="attendance-card">
+                        <h5><i class="fas fa-sun"></i> Sunday Morning</h5>
+                        <div class="count-row">
+                            <label>Visitors:</label>
+                            <input type="number" class="count-input" id="sunMornVisitors" min="0" value="0" onchange="updateTotal('sunMorn')">
+                        </div>
+                        <div class="count-row">
+                            <label>Congregation:</label>
+                            <input type="number" class="count-input" id="sunMornCongregation" min="0" value="0" onchange="updateTotal('sunMorn')">
+                        </div>
+                        <div class="count-total">
+                            <label>Total:</label>
+                            <span class="total-number" id="sunMornTotal">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Sunday Evening -->
+                    <div class="attendance-card">
+                        <h5><i class="fas fa-moon"></i> Sunday Evening</h5>
+                        <div class="count-row">
+                            <label>Visitors:</label>
+                            <input type="number" class="count-input" id="sunEveVisitors" min="0" value="0" onchange="updateTotal('sunEve')">
+                        </div>
+                        <div class="count-row">
+                            <label>Congregation:</label>
+                            <input type="number" class="count-input" id="sunEveCongregation" min="0" value="0" onchange="updateTotal('sunEve')">
+                        </div>
+                        <div class="count-total">
+                            <label>Total:</label>
+                            <span class="total-number" id="sunEveTotal">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Wednesday Night -->
+                    <div class="attendance-card">
+                        <h5><i class="fas fa-bible"></i> Wednesday Night</h5>
+                        <div class="count-row">
+                            <label>Visitors:</label>
+                            <input type="number" class="count-input" id="wedNightVisitors" min="0" value="0" onchange="updateTotal('wedNight')">
+                        </div>
+                        <div class="count-row">
+                            <label>Congregation:</label>
+                            <input type="number" class="count-input" id="wedNightCongregation" min="0" value="0" onchange="updateTotal('wedNight')">
+                        </div>
+                        <div class="count-total">
+                            <label>Total:</label>
+                            <span class="total-number" id="wedNightTotal">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Special Services -->
+                    <div class="attendance-card">
+                        <h5><i class="fas fa-star"></i> Special Services</h5>
+                        <div class="count-row">
+                            <label>Visitors:</label>
+                            <input type="number" class="count-input" id="specialVisitors" min="0" value="0" onchange="updateTotal('special')">
+                        </div>
+                        <div class="count-row">
+                            <label>Congregation:</label>
+                            <input type="number" class="count-input" id="specialCongregation" min="0" value="0" onchange="updateTotal('special')">
+                        </div>
+                        <div class="count-total">
+                            <label>Total:</label>
+                            <span class="total-number" id="specialTotal">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attendance-actions">
+                    <button class="btn btn-primary" onclick="saveAttendance()">
+                        <i class="fas fa-save"></i> Save Attendance
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearAttendanceForm()" style="background: #6c757d; color: white;">
+                        <i class="fas fa-eraser"></i> Clear Form
+                    </button>
+                </div>
+
+                <!-- Attendance History -->
+                <div class="attendance-history">
+                    <div class="attendance-filter" style="margin: 15px 0 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" type="button" onclick="filterAttendanceRange(30)">Last 1 Month</button>
+                        <button class="btn btn-secondary" type="button" onclick="filterAttendanceRange(90)">Last 3 Months</button>
+                        <button class="btn btn-secondary" type="button" onclick="filterAttendanceRange(365)">Last 1 Year</button>
+                        <button class="btn btn-secondary" type="button" onclick="filterAttendanceRange(0)">All</button>
+                    </div>
+                    <h5><i class="fas fa-history"></i> Recent Attendance Records</h5>
+                    <div style="overflow-x: auto;">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Sun AM</th>
+                                    <th>Sun PM</th>
+                                    <th>Wed</th>
+                                    <th>Special</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceHistoryBody">
+                                <!-- History rows will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Toast -->
+    <div class="success-toast" id="successToast">
+        <i class="fas fa-check-circle"></i> Attendance saved successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const CARDS_STORAGE_KEY = 'calvary_usher_cards';
+        const ATTENDANCE_STORAGE_KEY = 'calvary_attendance';
+
+        // Load statistics from localStorage
+        function loadStats() {
+            const data = localStorage.getItem(CARDS_STORAGE_KEY);
+
+            if (data) {
+                try {
+                    const parsed = JSON.parse(data);
+                    const cards = parsed.cards || [];
+
+                    // Total cards
+                    document.getElementById('totalCards').textContent = cards.length;
+
+                    // This month
+                    const now = new Date();
+                    const thisMonth = cards.filter(card => {
+                        const cardDate = new Date(card.timestamp || card.date);
+                        return cardDate.getMonth() === now.getMonth() &&
+                               cardDate.getFullYear() === now.getFullYear();
+                    }).length;
+                    document.getElementById('thisMonth').textContent = thisMonth;
+
+                    // First-time guests
+                    const firstTime = cards.filter(card => card.firstTimeGuest).length;
+                    document.getElementById('firstTime').textContent = firstTime;
+
+                    // Requested follow-up (visit from pastor or want to know more)
+                    const followUp = cards.filter(card =>
+                        card.visitFromPastor || card.knowMoreAboutChurch || card.becomeChristian
+                    ).length;
+                    document.getElementById('followUp').textContent = followUp;
+
+                } catch (e) {
+                    console.error('Error parsing cards data:', e);
+                    setDefaultStats();
+                }
+            } else {
+                setDefaultStats();
+            }
+        }
+
+        function setDefaultStats() {
+            document.getElementById('totalCards').textContent = '0';
+            document.getElementById('thisMonth').textContent = '0';
+            document.getElementById('firstTime').textContent = '0';
+            document.getElementById('followUp').textContent = '0';
+        }
+
+        // Attendance Counter Functions
+        function updateTotal(service) {
+            const visitors = parseInt(document.getElementById(service + 'Visitors').value) || 0;
+            const congregation = parseInt(document.getElementById(service + 'Congregation').value) || 0;
+            document.getElementById(service + 'Total').textContent = visitors + congregation;
+        }
+
+        function saveAttendance() {
+            const date = document.getElementById('attendanceDate').value;
+            if (!date) {
+                alert('Please select a date for the attendance record.');
+                return;
+            }
+
+            const record = {
+                id: Date.now().toString(),
+                date: date,
+                sunMorn: {
+                    visitors: parseInt(document.getElementById('sunMornVisitors').value) || 0,
+                    congregation: parseInt(document.getElementById('sunMornCongregation').value) || 0
+                },
+                sunEve: {
+                    visitors: parseInt(document.getElementById('sunEveVisitors').value) || 0,
+                    congregation: parseInt(document.getElementById('sunEveCongregation').value) || 0
+                },
+                wedNight: {
+                    visitors: parseInt(document.getElementById('wedNightVisitors').value) || 0,
+                    congregation: parseInt(document.getElementById('wedNightCongregation').value) || 0
+                },
+                special: {
+                    visitors: parseInt(document.getElementById('specialVisitors').value) || 0,
+                    congregation: parseInt(document.getElementById('specialCongregation').value) || 0
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            // Calculate totals
+            record.sunMorn.total = record.sunMorn.visitors + record.sunMorn.congregation;
+            record.sunEve.total = record.sunEve.visitors + record.sunEve.congregation;
+            record.wedNight.total = record.wedNight.visitors + record.wedNight.congregation;
+            record.special.total = record.special.visitors + record.special.congregation;
+            record.grandTotal = record.sunMorn.total + record.sunEve.total + record.wedNight.total + record.special.total;
+
+            // Save to localStorage
+            let data = localStorage.getItem(ATTENDANCE_STORAGE_KEY);
+            let records = data ? JSON.parse(data) : { records: [] };
+
+            // Check if record for this date already exists
+            const existingIndex = records.records.findIndex(r => r.date === date);
+            if (existingIndex >= 0) {
+                if (confirm('An attendance record for this date already exists. Do you want to replace it?')) {
+                    records.records[existingIndex] = record;
+                } else {
+                    return;
+                }
+            } else {
+                records.records.push(record);
+            }
+
+            // Sort by date, newest first
+            records.records.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            localStorage.setItem(ATTENDANCE_STORAGE_KEY, JSON.stringify(records));
+
+            // Show success toast
+            showToast();
+
+            // Clear form and reload history
+            clearAttendanceForm();
+            loadAttendanceHistory();
+        }
+
+        function clearAttendanceForm() {
+            document.getElementById('sunMornVisitors').value = 0;
+            document.getElementById('sunMornCongregation').value = 0;
+            document.getElementById('sunEveVisitors').value = 0;
+            document.getElementById('sunEveCongregation').value = 0;
+            document.getElementById('wedNightVisitors').value = 0;
+            document.getElementById('wedNightCongregation').value = 0;
+            document.getElementById('specialVisitors').value = 0;
+            document.getElementById('specialCongregation').value = 0;
+
+            updateTotal('sunMorn');
+            updateTotal('sunEve');
+            updateTotal('wedNight');
+            updateTotal('special');
+        }
+
+        function renderAttendanceRows(records) {
+            const tbody = document.getElementById('attendanceHistoryBody');
+
+            if (!records || records.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #666; padding: 20px;">No attendance records yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = records.slice(0, 10).map(record => {
+                const displayDate = new Date(record.date).toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+
+                const sunMornTotal = record.sunMorn ? record.sunMorn.total : 0;
+                const sunEveTotal = record.sunEve ? record.sunEve.total : 0;
+                const wedTotal = record.wedNight ? record.wedNight.total : 0;
+                const specialTotal = record.special ? record.special.total : 0;
+                const grandTotal = record.grandTotal || (sunMornTotal + sunEveTotal + wedTotal + specialTotal);
+
+                return `
+                    <tr>
+                        <td>${displayDate}</td>
+                        <td>${sunMornTotal} <small style="color:#888">(${record.sunMorn?.visitors || 0}v)</small></td>
+                        <td>${sunEveTotal} <small style="color:#888">(${record.sunEve?.visitors || 0}v)</small></td>
+                        <td>${wedTotal} <small style="color:#888">(${record.wedNight?.visitors || 0}v)</small></td>
+                        <td>${specialTotal} <small style="color:#888">(${record.special?.visitors || 0}v)</small></td>
+                        <td><strong>${grandTotal}</strong></td>
+                        <td><button class="delete-btn" onclick="deleteAttendance('${record.id}')"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function loadAttendanceHistory() {
+            const data = localStorage.getItem(ATTENDANCE_STORAGE_KEY);
+
+            if (!data) {
+                renderAttendanceRows([]);
+                return;
+            }
+
+            try {
+                const records = JSON.parse(data).records || [];
+                renderAttendanceRows(records);
+            } catch (e) {
+                console.error('Error loading attendance history:', e);
+                const tbody = document.getElementById('attendanceHistoryBody');
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #dc3545;">Error loading records.</td></tr>';
+            }
+        }
+
+        function filterAttendanceRange(days) {
+            const data = localStorage.getItem(ATTENDANCE_STORAGE_KEY);
+            if (!data) {
+                renderAttendanceRows([]);
+                return;
+            }
+
+            try {
+                let records = JSON.parse(data).records || [];
+                if (days > 0) {
+                    const cutoff = new Date();
+                    cutoff.setDate(cutoff.getDate() - days);
+                    records = records.filter(record => {
+                        const d = new Date(record.date);
+                        return !isNaN(d.getTime()) && d >= cutoff;
+                    });
+                }
+                renderAttendanceRows(records);
+            } catch (e) {
+                console.error('Error filtering attendance history:', e);
+                renderAttendanceRows([]);
+            }
+        }
+
+        function deleteAttendance(id) {
+            if (!confirm('Are you sure you want to delete this attendance record?')) return;
+
+            let data = localStorage.getItem(ATTENDANCE_STORAGE_KEY);
+            if (data) {
+                let records = JSON.parse(data);
+                records.records = records.records.filter(r => r.id !== id);
+                localStorage.setItem(ATTENDANCE_STORAGE_KEY, JSON.stringify(records));
+                loadAttendanceHistory();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('successToast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStats();
+            loadAttendanceHistory();
+
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('attendanceDate').value = today;
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

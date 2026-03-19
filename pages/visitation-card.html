@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visitation Card Update - Cornerstone Baptist Church">
+    <title>Visitation Card Update | Cornerstone Baptist Church</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .visitation-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .visitation-card {
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .visitation-card h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .form-row label {
+            font-weight: 700;
+            min-width: 120px;
+            padding-top: 0.5rem;
+        }
+
+        .form-row input[type="text"],
+        .form-row textarea {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-row textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .question-section {
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #ddd;
+        }
+
+        .question-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .question-item .question-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .question-item .question-text input[type="text"] {
+            width: 100%;
+            margin-top: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .yes-no-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .yes-no-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: normal;
+            min-width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-section {
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-section h4 {
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: normal;
+            min-width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"],
+        .checkbox-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-section button {
+            background: var(--primary-color, #14AFB1);
+            color: #fff;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-section button:hover {
+            background: #0d8a8c;
+        }
+
+        .submit-section button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row label {
+                margin-bottom: 0.25rem;
+            }
+
+            .question-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .yes-no-group {
+                margin-top: 0.5rem;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+    <span class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    <span class="menu-label">Menu</span>
+</button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Visitation Card Update</h1>
+            <p>Submit your visitation report</p>
+        </div>
+    </section>
+
+    <!-- Visitation Form -->
+    <section class="visitation-form-section" style="padding: 3rem 0; background: #f5f5f5;">
+        <div class="visitation-form-container">
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> The Card Was Added Successfully
+            </div>
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText">Error submitting card. Please try again.</span>
+            </div>
+
+            <form id="visitationForm">
+                <div class="visitation-card">
+                    <h2>Cornerstone Baptist Church - Visitation Card</h2>
+
+                    <div class="form-row">
+                        <label for="personName">NAME:</label>
+                        <input type="text" id="personName" name="personName" required placeholder="Name of person visited">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="address">ADDRESS:</label>
+                        <input type="text" id="address" name="address" required placeholder="Street address">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="distance">DISTANCE:</label>
+                        <input type="text" id="distance" name="distance" placeholder="e.g., 0.6 miles">
+                    </div>
+
+                    <div class="question-section">
+                        <div class="question-item">
+                            <div class="question-text">
+                                1. Has the person or family attended church in the past?
+                                <input type="text" id="q1Where" name="q1Where" placeholder="Write where">
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <span class="question-text">2. Has the person been saved and baptized?</span>
+                            <div class="yes-no-group">
+                                <label><input type="radio" name="q2SavedBaptized" value="yes"> YES</label>
+                                <label><input type="radio" name="q2SavedBaptized" value="no"> NO</label>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <span class="question-text">3. Would the person need a ride to church?</span>
+                            <div class="yes-no-group">
+                                <label><input type="radio" name="q3NeedRide" value="yes"> YES</label>
+                                <label><input type="radio" name="q3NeedRide" value="no"> NO</label>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <span class="question-text">4. Would the person like a follow up visit?</span>
+                            <div class="yes-no-group">
+                                <label><input type="radio" name="q4FollowUp" value="yes"> YES</label>
+                                <label><input type="radio" name="q4FollowUp" value="no"> NO</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-section">
+                        <h4>Please Check:</h4>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="status" value="answered"> Answered Door</label>
+                            <label><input type="checkbox" name="status" value="noHome"> No One Home</label>
+                            <label><input type="checkbox" name="status" value="leftPacket"> Left Packet/Tract</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-section">
+                        <h4>AGE:</h4>
+                        <div class="checkbox-group">
+                            <label><input type="radio" name="age" value="young"> Young</label>
+                            <label><input type="radio" name="age" value="middleAged"> Middle Aged</label>
+                            <label><input type="radio" name="age" value="senior"> Senior</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-section">
+                        <h4>CHILDREN:</h4>
+                        <div class="checkbox-group">
+                            <label><input type="radio" name="children" value="yes"> Yes</label>
+                            <label><input type="radio" name="children" value="no"> No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <label for="comments">COMMENTS:</label>
+                        <textarea id="comments" name="comments" placeholder="Additional comments..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="visitorName">Your name:</label>
+                        <input type="text" id="visitorName" name="visitorName" required placeholder="Your name">
+                    </div>
+
+                    <div class="submit-section">
+                        <button type="submit" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Submit Visitation Card
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Remove any legacy local-storage UI if it exists
+        window.addEventListener('DOMContentLoaded', function() {
+            const candidates = document.querySelectorAll('section, div');
+            candidates.forEach(function(el) {
+                const text = (el.textContent || '').toLowerCase();
+                if (text.includes('submitted cards') && text.includes('local storage')) {
+                    el.remove();
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('visitationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            // Hide messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            // Gather form data
+            const q2 = document.querySelector('input[name="q2SavedBaptized"]:checked');
+            const q3 = document.querySelector('input[name="q3NeedRide"]:checked');
+            const q4 = document.querySelector('input[name="q4FollowUp"]:checked');
+            const age = document.querySelector('input[name="age"]:checked');
+            const children = document.querySelector('input[name="children"]:checked');
+            const statusChecks = document.querySelectorAll('input[name="status"]:checked');
+
+            // Validate required fields
+            const personName = document.getElementById('personName').value;
+            const address = document.getElementById('address').value;
+            const visitorName = document.getElementById('visitorName').value;
+
+            if (!personName || !address || !visitorName) {
+                errorText.textContent = 'Name, address, and your name are required.';
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Visitation Card';
+                return;
+            }
+
+            // Build form data for server
+            const formData = new FormData();
+            formData.append('action', 'visitation_save');
+            formData.append('personName', personName);
+            formData.append('address', address);
+            formData.append('distance', document.getElementById('distance').value);
+            formData.append('q1Where', document.getElementById('q1Where').value);
+            formData.append('q2SavedBaptized', q2 ? q2.value : '');
+            formData.append('q3NeedRide', q3 ? q3.value : '');
+            formData.append('q4FollowUp', q4 ? q4.value : '');
+            formData.append('status', JSON.stringify(Array.from(statusChecks).map(cb => cb.value)));
+            formData.append('age', age ? age.value : '');
+            formData.append('children', children ? children.value : '');
+            formData.append('comments', document.getElementById('comments').value);
+            formData.append('visitorName', visitorName);
+
+            try {
+                const response = await fetch('../php/media-handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    successMsg.style.display = 'block';
+                    document.getElementById('visitationForm').reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    errorText.textContent = result.message || 'Error submitting card. Please try again.';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorText.textContent = 'Network error. Please try again.';
+                errorMsg.style.display = 'block';
+            }
+
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Visitation Card';
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

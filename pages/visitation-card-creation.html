@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visitation Card Creation - Cornerstone Baptist Church">
+    <title>Visitation Card Creation | Cornerstone Baptist Church</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .creation-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        .creation-card {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .creation-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .creation-card p {
+            color: #4a4a4a;
+        }
+
+        .upload-row {
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .upload-row input[type="file"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fafafa;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-box {
+            background: #f5f7fb;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .help-box code {
+            background: #e9eef7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .status-message {
+            margin-top: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .preview-table th,
+        .preview-table td {
+            border: 1px solid #e2e2e2;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .preview-table th {
+            background: #f3f3f3;
+        }
+
+        .template-sample {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-line;
+        }
+
+        @media (max-width: 600px) {
+            .creation-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Navigation (FBC Hammond Style) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Mobile Logo (hidden on desktop) -->
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+    <span class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    <span class="menu-label">Menu</span>
+</button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="visitation.html">Visitation</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="watch.html">Watch</a></li>
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>Visitation Card Creation</h1>
+            <p>Create printable visitation cards from a spreadsheet</p>
+        </div>
+    </section>
+
+    <section class="ministry-single-content">
+        <div class="creation-container">
+            <div class="creation-card" id="loginSection">
+                <h2><i class="fas fa-lock"></i> Login Required</h2>
+                <p>Use the same credentials as the Visitation Report page.</p>
+                <form id="loginForm">
+                    <div class="form-row">
+                        <label for="username">Username (Email)</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="submit-section">
+                        <button type="submit" id="loginBtn" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+                    <div class="status-message status-error" id="loginError">Invalid credentials.</div>
+                </form>
+            </div>
+
+            <div class="creation-card" id="creatorSection" style="display:none;">
+                <h2><i class="fas fa-file-excel"></i> Upload Spreadsheet</h2>
+                <p>Upload an Excel (.xlsx, .xls) or CSV file to generate printable visitation cards. Each page will contain 2 cards.</p>
+
+                <div class="upload-row">
+                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+                    <button class="btn btn-primary" id="generateBtn">
+                        <i class="fas fa-file-pdf"></i> Generate PDF
+                    </button>
+                </div>
+
+                <div class="status-message status-info" id="statusInfo"></div>
+                <div class="status-message status-success" id="statusSuccess"></div>
+                <div class="status-message status-error" id="statusError"></div>
+
+                <div class="help-box">
+                    <strong><i class="fas fa-info-circle"></i> Spreadsheet Format:</strong>
+                    <p style="margin-top: 0.5rem;">Your spreadsheet should have columns with these headers (case-insensitive):</p>
+                    <p>
+                        <code>Name</code> or <code>personName</code> - Person's name (required)<br>
+                        <code>Address</code> - Street address (required)<br>
+                        <code>Distance</code> - Distance from church (optional)
+                    </p>
+                    <div class="template-sample">
+Example spreadsheet:
+Name            | Address                      | Distance
+----------------|------------------------------|----------
+Samantha Remson | 135 NEWCASTLE CIR            | 0.6 miles
+Donald White    | 920 DENTON BLVD NW APT 261   | 0.7 miles
+                    </div>
+                    <p><strong>Tip:</strong> The generated PDF will have 2 cards per page, pre-filled with name, address, and distance. All other fields are left blank for handwriting after the visit.</p>
+                </div>
+
+                <div id="preview"></div>
+
+                <div style="margin-top: 1.5rem; text-align: right;">
+                    <button class="btn btn-outline" onclick="logout()" style="background: transparent; border: 1px solid #ccc; color: #666;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:15 AM</p>
+                    <p>Sunday Morning: 10:30 AM</p>
+                    <p>Sunday Evening: 6:00 PM</p>
+                    <p>Wednesday Evening: 7:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const SESSION_KEY = 'visitation_report_session';
+        const SESSION_TIMEOUT = 4 * 60 * 60 * 1000; // 4 hours
+
+        const loginSection = document.getElementById('loginSection');
+        const creatorSection = document.getElementById('creatorSection');
+        const loginError = document.getElementById('loginError');
+        const statusInfo = document.getElementById('statusInfo');
+        const statusSuccess = document.getElementById('statusSuccess');
+        const statusError = document.getElementById('statusError');
+        const preview = document.getElementById('preview');
+
+        function showStatus(el, message) {
+            [statusInfo, statusSuccess, statusError].forEach(node => node.style.display = 'none');
+            if (el) {
+                el.textContent = message;
+                el.style.display = 'block';
+            }
+        }
+
+        function checkSession() {
+            const session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                const sessionData = JSON.parse(session);
+                if (Date.now() - sessionData.timestamp < SESSION_TIMEOUT) {
+                    loginSection.style.display = 'none';
+                    creatorSection.style.display = 'block';
+                    return;
+                }
+            }
+            loginSection.style.display = 'block';
+            creatorSection.style.display = 'none';
+        }
+
+        function logout() {
+            localStorage.removeItem(SESSION_KEY);
+            checkSession();
+        }
+
+        checkSession();
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'login');
+                formData.append('username', document.getElementById('username').value);
+                formData.append('password', document.getElementById('password').value);
+
+                const response = await fetch('../php/media-handler.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    localStorage.setItem(SESSION_KEY, JSON.stringify({
+                        username: result.username,
+                        timestamp: Date.now()
+                    }));
+                    checkSession();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            } catch (err) {
+                loginError.textContent = 'Network error. Please try again.';
+                loginError.style.display = 'block';
+            }
+
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        });
+
+        function normalizeKeys(row) {
+            const normalized = {};
+            Object.keys(row || {}).forEach(key => {
+                const normalizedKey = key.toString().trim().toLowerCase();
+                normalized[normalizedKey] = row[key];
+            });
+            return normalized;
+        }
+
+        function getField(row, keys) {
+            const normalized = normalizeKeys(row);
+            for (const key of keys) {
+                const normalizedKey = key.toLowerCase();
+                if (row[key] !== undefined && row[key] !== null && row[key] !== '') {
+                    return row[key];
+                }
+                if (normalized[normalizedKey] !== undefined && normalized[normalizedKey] !== null && normalized[normalizedKey] !== '') {
+                    return normalized[normalizedKey];
+                }
+            }
+            return '';
+        }
+
+        function normalizeCard(row) {
+            const firstName = getField(row, ['first name', 'first_name', 'firstname']);
+            const lastName = getField(row, ['last name', 'last_name', 'lastname']);
+            const personNameRaw = getField(row, ['name', 'personName', 'person name']);
+            const personName = (personNameRaw || `${firstName} ${lastName}` || '').toString().trim();
+
+            const street = getField(row, ['street address', 'address', 'street']);
+            const city = getField(row, ['city', 'post office']);
+            const state = getField(row, ['state']);
+            const zip = getField(row, ['zip code', 'zip']);
+            const addressParts = [street, city, state, zip].map(v => (v || '').toString().trim()).filter(Boolean);
+
+            const distance = getField(row, ['distance from church', 'distance']);
+
+            return {
+                name: personName,
+                address: addressParts.join(', '),
+                distance: (distance || '').toString().trim()
+            };
+        }
+
+        function previewCards(cards) {
+            if (!cards.length) {
+                preview.innerHTML = '';
+                return;
+            }
+            const rows = cards.slice(0, 10).map((card, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${card.name}</td>
+                    <td>${card.address}</td>
+                    <td>${card.distance}</td>
+                </tr>
+            `).join('');
+            preview.innerHTML = `
+                <h3 style="margin-top:1.5rem;"><i class="fas fa-eye"></i> Preview (showing ${Math.min(cards.length, 10)} of ${cards.length})</h3>
+                <table class="preview-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Distance</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            `;
+        }
+
+        function drawCard(doc, card, startY) {
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            const cardHeight = 125; // Height for each card
+            const lineHeight = 6;
+            const checkboxSize = 3;
+
+            let y = startY;
+
+            // Header
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Cornerstone Baptist Church - Visitation Card', margin, y);
+            y += 10;
+
+            // Name, Address, Distance with values
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('NAME:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(card.name, margin + 22, y);
+            y += lineHeight;
+
+            doc.setFont('helvetica', 'bold');
+            doc.text('ADDRESS:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(card.address, margin + 28, y);
+            y += lineHeight;
+
+            doc.setFont('helvetica', 'bold');
+            doc.text('DISTANCE:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.text(card.distance, margin + 30, y);
+            y += 8;
+
+            // Questions
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('1. Has the person or family attended church in the past? Write where.', margin, y);
+            y += lineHeight;
+            doc.line(margin, y, pageWidth - margin, y); // Line for writing
+            y += 6;
+
+            doc.text('2. Has the person been saved and baptized?', margin, y);
+            doc.text('YES', margin + 85, y);
+            doc.rect(margin + 95, y - 3, checkboxSize, checkboxSize);
+            doc.text('NO', margin + 105, y);
+            doc.rect(margin + 112, y - 3, checkboxSize, checkboxSize);
+            y += lineHeight;
+
+            doc.text('3. Would the person need a ride to church?', margin, y);
+            doc.text('YES', margin + 85, y);
+            doc.rect(margin + 95, y - 3, checkboxSize, checkboxSize);
+            doc.text('NO', margin + 105, y);
+            doc.rect(margin + 112, y - 3, checkboxSize, checkboxSize);
+            y += lineHeight;
+
+            doc.text('4. Would the person like a follow up visit?', margin, y);
+            doc.text('YES', margin + 85, y);
+            doc.rect(margin + 95, y - 3, checkboxSize, checkboxSize);
+            doc.text('NO', margin + 105, y);
+            doc.rect(margin + 112, y - 3, checkboxSize, checkboxSize);
+            y += 8;
+
+            // Please Check row
+            doc.setFont('helvetica', 'bold');
+            doc.text('Please Check:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.rect(margin + 35, y - 3, checkboxSize, checkboxSize);
+            doc.text('Answered Door', margin + 40, y);
+            doc.rect(margin + 70, y - 3, checkboxSize, checkboxSize);
+            doc.text('No One Home', margin + 75, y);
+            doc.rect(margin + 105, y - 3, checkboxSize, checkboxSize);
+            doc.text('Left Packet/Tract', margin + 110, y);
+            y += 8;
+
+            // Age row
+            doc.setFont('helvetica', 'bold');
+            doc.text('AGE:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.rect(margin + 18, y - 3, checkboxSize, checkboxSize);
+            doc.text('Young', margin + 23, y);
+            doc.rect(margin + 43, y - 3, checkboxSize, checkboxSize);
+            doc.text('Middle Aged', margin + 48, y);
+            doc.rect(margin + 78, y - 3, checkboxSize, checkboxSize);
+            doc.text('Senior', margin + 83, y);
+            y += lineHeight;
+
+            // Children row
+            doc.setFont('helvetica', 'bold');
+            doc.text('CHILDREN:', margin, y);
+            doc.setFont('helvetica', 'normal');
+            doc.rect(margin + 30, y - 3, checkboxSize, checkboxSize);
+            doc.text('Yes', margin + 35, y);
+            doc.rect(margin + 50, y - 3, checkboxSize, checkboxSize);
+            doc.text('No', margin + 55, y);
+            y += 8;
+
+            // Additional Comments
+            doc.setFont('helvetica', 'bold');
+            doc.text('ADDITIONAL COMMENTS:', margin, y);
+            y += 5;
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 5;
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 8;
+
+            // Your name
+            doc.setFont('helvetica', 'bold');
+            doc.text('Your name:', margin, y);
+            doc.line(margin + 28, y, margin + 100, y);
+            y += 6;
+
+            // Email
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Email:  or ', margin, y);
+
+            return startY + cardHeight;
+        }
+
+        function generatePdf(cards) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'letter'
+            });
+
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const cardHeight = 125;
+            const topMargin = 15;
+            const cardSpacing = 10;
+
+            for (let i = 0; i < cards.length; i++) {
+                const cardIndexOnPage = i % 2;
+
+                // Add new page for every 2 cards (except first page)
+                if (i > 0 && cardIndexOnPage === 0) {
+                    doc.addPage();
+                }
+
+                // Calculate Y position for this card
+                let y = topMargin + (cardIndexOnPage * (cardHeight + cardSpacing));
+
+                // Draw the card
+                drawCard(doc, cards[i], y);
+
+                // Draw dashed separator line between cards on same page
+                if (cardIndexOnPage === 0 && i + 1 < cards.length) {
+                    const separatorY = topMargin + cardHeight + (cardSpacing / 2);
+                    doc.setLineDashPattern([2, 2], 0);
+                    doc.line(10, separatorY, doc.internal.pageSize.getWidth() - 10, separatorY);
+                    doc.setLineDashPattern([], 0);
+                }
+            }
+
+            return doc;
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', async function() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) {
+                showStatus(statusError, 'Please select a spreadsheet file (.xlsx, .xls, or .csv)');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileName = file.name.toLowerCase();
+
+            // Validate file type
+            if (!fileName.endsWith('.xlsx') && !fileName.endsWith('.xls') && !fileName.endsWith('.csv')) {
+                showStatus(statusError, 'Invalid file type. Please upload an Excel (.xlsx, .xls) or CSV file.');
+                return;
+            }
+
+            showStatus(statusInfo, 'Reading spreadsheet...');
+
+            try {
+                const data = await file.arrayBuffer();
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+                if (!rows.length) {
+                    showStatus(statusError, 'The spreadsheet appears to be empty.');
+                    preview.innerHTML = '';
+                    return;
+                }
+
+                const cards = rows.map(normalizeCard).filter(card => card.name && card.address);
+
+                if (!cards.length) {
+                    showStatus(statusError, 'No valid rows found. Required columns: First Name + Last Name (or Name), and Street address.');
+                    preview.innerHTML = '';
+                    return;
+                }
+
+                previewCards(cards);
+                showStatus(statusInfo, `Generating PDF with ${cards.length} cards (${Math.ceil(cards.length / 2)} pages)...`);
+
+                // Generate PDF
+                const doc = generatePdf(cards);
+
+                // Download
+                const timestamp = new Date().toISOString().slice(0, 10);
+                const filename = `visitation-cards-${timestamp}.pdf`;
+                doc.save(filename);
+
+                showStatus(statusSuccess, `PDF generated successfully! ${cards.length} cards on ${Math.ceil(cards.length / 2)} pages. Check your downloads folder.`);
+
+            } catch (err) {
+                console.error(err);
+                showStatus(statusError, 'Error reading the spreadsheet. Please verify the file format is correct.');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
