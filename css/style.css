@@ -149,7 +149,7 @@ section {
 }
 
 /* ====================================
-   Top Bar (Black with Logo Only - FBC Hammond Style)
+   Top Bar (Black with Logo Only - Cornerstone Style)
    ==================================== */
 .top-bar {
     background-color: var(--dark-bg);
@@ -216,7 +216,7 @@ section {
 }
 
 /* ====================================
-   Navigation (FBC Hammond Dark Style)
+   Navigation (Cornerstone Dark Style)
    ==================================== */
 .navbar {
     background-color: var(--dark-bg);
@@ -568,7 +568,7 @@ section {
 }
 
 /* ====================================
-   Hero Section (FBC Hammond Style - Grayscale)
+   Hero Section (Cornerstone Style - Grayscale)
    ==================================== */
 .hero {
     position: relative;
@@ -3992,7 +3992,7 @@ section {
 }
 
 /* ====================================
-   FBC Hammond Style Service Times Blocks
+   Cornerstone Style Service Times Blocks
    ==================================== */
 .service-times-fbc {
     background-color: var(--dark-bg);
@@ -4226,7 +4226,7 @@ section {
 }
 
 /* ====================================
-   Info Boxes Section (FBC Hammond Style - Teal Boxes)
+   Info Boxes Section (Cornerstone Style - Teal Boxes)
    ==================================== */
 .info-boxes-section {
     background-color: var(--dark-bg);
@@ -5597,7 +5597,7 @@ section {
 }
 
 /* ====================================
-   Contact Page - FBC Hammond Style
+   Contact Page - Cornerstone Style
    (Dark Background with Teal Accents)
    ==================================== */
 
@@ -6063,6 +6063,15 @@ section {
     color: var(--text-dark);
     line-height: 1.8;
     border: 1px solid var(--light-gray);
+}
+
+.giving-address .giving-address-image {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    display: block;
+    object-fit: contain;
+    border-radius: var(--radius-md);
 }
 
 .giving-contact-section {
