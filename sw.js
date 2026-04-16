@@ -1,6 +1,6 @@
 ﻿// Cornerstone Baptist Church Service Worker
 // Change this version number when you deploy updates
-const CACHE_VERSION = 'v7';
+const CACHE_VERSION = 'v8';
 const CACHE_NAME = 'hbc-bamban-' + CACHE_VERSION;
 
 const urlsToCache = [
@@ -105,6 +105,20 @@ self.addEventListener('fetch', function(event) {
                     return caches.match(request).then(function(response) {
                         return response || caches.match('/index.html');
                     });
+                })
+        );
+        return;
+    }
+
+    // For videos, prefer the network so updated lesson files are not stuck in stale browser caches.
+    if (request.url.includes('/videos/')) {
+        event.respondWith(
+            fetch(request)
+                .then(function(response) {
+                    return response;
+                })
+                .catch(function() {
+                    return caches.match(request);
                 })
         );
         return;

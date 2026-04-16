@@ -47,6 +47,52 @@
             border-radius: 8px;
             background: #000000;
         }
+
+        .sign-video-shell {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .sign-video-cover {
+            position: absolute;
+            inset: 0;
+            background-image: url('../images/Cornerstone.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .sign-video-trigger {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 0;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.58));
+            color: #ffffff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .sign-video-trigger i {
+            font-size: 1.2rem;
+        }
+
+        .sign-video-shell.is-loaded .sign-video-trigger {
+            display: none;
+        }
+
+        .sign-video-shell.is-loaded .sign-video-cover {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -100,10 +146,20 @@
                         <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu two-column">
                             <li><a href="children.html">Kids</a></li>
-                            <li><a href="youth.html">Youth</a></li>
+                            <li><a href="youth-ministry.html">Youth</a></li>
                             <li><a href="couples.html">Couples</a></li>
                             <li><a href="missions.html">Missions</a></li>
-                            <li><a href="visitation.html">Visitation</a></li>
+                            
+<li><a href="school-ministry.html">School Ministry</a></li>
+<li><a href="sned-ministry.html">SNED Ministry</a></li>
+<li><a href="police-ministry.html">Police Ministry</a></li>
+<li><a href="aetas-ministry.html">Aetas Ministry</a></li>
+<li><a href="medicine-ministry.html">Medicine Ministry</a></li>
+<li><a href="deaf-ministry.html">Deaf Ministry</a></li>
+<li><a href="childrens-ministry-subject.html">Children's Ministry Subject</a></li>
+<li><a href="discipleship-ministry.html">Discipleship Ministry</a></li>
+<li><a href="visitation-ministry-subject.html">Visitation Ministry Subject</a></li>
+<li><a href="home-bible-study-ministry.html">Home Bible Study</a></li>
                             <li class="dropdown sub-dropdown">
                                 <a href="#">More <i class="fas fa-chevron-down"></i></a>
                                 <ul class="dropdown-menu sub-menu">
@@ -115,8 +171,7 @@
                     <li class="dropdown">
                         <a href="#">Media <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="watch.html">Watch</a></li>
-                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                                                        <li><a href="learn-signs.html">Learn Signs</a></li>
                             <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
                             <li><a href="media-library.html">Cornerstone Media Library</a></li>
                             <li><a href="privacy.html">Privacy Policy</a></li>
@@ -162,38 +217,124 @@
                     <div class="sign-video-grid">
                         <article class="sign-video-card">
                             <h3>Religious Signs</h3>
-                            <video controls preload="metadata">
-                                <source src="../videos/religious-signs.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/religious-signs.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
                         </article>
                         <article class="sign-video-card">
                             <h3>National Signs</h3>
-                            <video controls preload="metadata">
-                                <source src="../videos/national-signs.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/national-signs.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
                         </article>
                         <article class="sign-video-card">
                             <h3>Emotion Signs</h3>
-                            <video controls preload="metadata">
-                                <source src="../videos/emotion-signs.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/emotion-signs.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
                         </article>
                         <article class="sign-video-card">
                             <h3>Emotion Signs Part 2</h3>
-                            <video controls preload="metadata">
-                                <source src="../videos/emotion-signs-part-2.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/emotion-signs-part-2.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
                         </article>
                         <article class="sign-video-card">
                             <h3>Emotion Signs Part 3</h3>
-                            <video controls preload="metadata">
-                                <source src="../videos/emotion-signs-part-3.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/emotion-signs-part-3.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Emotion Signs Part 4</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/emotion-signs-part-4.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Countries Signs</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/countries-signs.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Animals Signs</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/animals-signs.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Animals Signs Part 2</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/animals-signs-part-2.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Days of the Week</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/days-of-the-week.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
+                        </article>
+                        <article class="sign-video-card">
+                            <h3>Sign Names of People in the Bible - Old Testament</h3>
+                            <div class="sign-video-shell">
+                                <div class="sign-video-cover" aria-hidden="true"></div>
+                                <video controls preload="none" data-lazy-video poster="../images/Cornerstone.jpg">
+                                    <source data-src="../videos/sign-names-people-bible-old-testament.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <button type="button" class="sign-video-trigger"><i class="fas fa-play-circle"></i><span>Tap to Load Video</span></button>
+                            </div>
                         </article>
                         <article class="sign-video-card">
                             <h3>Days of the Week</h3>
@@ -229,10 +370,9 @@
 
                 <div class="footer-section">
                     <h4>Service Times</h4>
-                    <p>Sunday School: 8:00 AM - 8:45 AM</p>
-                    <p>Sunday Worship: 9:00 AM - 11:00 AM</p>
-                    <p>Friday Prayer: 5:30 PM - 6:30 PM</p>
-                </div>
+                    <p>Sunday School: 9:00 AM - 10:00 AM</p>
+                    <p>Morning Service: 10:00 AM - 11:30 AM</p>
+                    <p>Afternoon Service: 2:00 PM - 3:00 PM</p></div>
 
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -248,7 +388,7 @@
                     <h4>Contact Us</h4>
                     <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
                     <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
-                    <p><i class="fas fa-envelope"></i> </p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:andypena1330@gmail.com" style="color: #FFFFFF !important;">andypena1330@gmail.com</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -260,6 +400,47 @@
     <script src="../js/main.js"></script>
     <script src="../js/pwa-install.js"></script>
     <script>
+        function attachLazyVideoSource(video) {
+            if (!video || video.dataset.loaded === 'true') {
+                return;
+            }
+
+            const source = video.querySelector('source[data-src]');
+            if (!source) {
+                return;
+            }
+
+            source.src = source.dataset.src;
+            video.dataset.loaded = 'true';
+            video.load();
+        }
+
+        document.querySelectorAll('video[data-lazy-video]').forEach((video) => {
+            const shell = video.closest('.sign-video-shell');
+            const trigger = shell ? shell.querySelector('.sign-video-trigger') : null;
+
+            const loadVideo = () => {
+                attachLazyVideoSource(video);
+                if (shell) {
+                    shell.classList.add('is-loaded');
+                }
+            };
+
+            const loadAndPlay = () => {
+                const shouldStart = video.dataset.loaded !== 'true';
+                loadVideo();
+                if (shouldStart) {
+                    video.play().catch(() => {});
+                }
+            };
+
+            if (trigger) {
+                trigger.addEventListener('click', loadAndPlay);
+            }
+
+            video.addEventListener('play', loadVideo);
+        });
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js');
@@ -268,3 +449,8 @@
     </script>
 </body>
 </html>
+
+
+
+
+
