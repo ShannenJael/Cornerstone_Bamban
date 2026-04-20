@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to use the Cornerstone Baptist Church website to plan a visit, contact the church, request prayer, explore ministries, and find important information quickly.">
+    <title>How to Use This Website | Cornerstone Baptist Church</title>
+
+    <link rel="icon" type="image/png" href="../images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="../images/Cornerstone.jpg">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#14AFB1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cornerstone Baptist">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .how-to-page {
+            background: linear-gradient(180deg, #f5fbfb 0%, #ffffff 100%);
+        }
+
+        .how-to-intro {
+            padding: 80px 0 40px;
+        }
+
+        .how-to-lead {
+            max-width: 780px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .how-to-lead p {
+            font-size: 1.08rem;
+            color: #44515f;
+        }
+
+        .how-to-grid,
+        .task-grid,
+        .tip-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .how-to-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            margin-top: 32px;
+        }
+
+        .task-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .tip-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .how-card,
+        .task-card,
+        .tip-card,
+        .quick-links-panel {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 16px 40px rgba(10, 50, 74, 0.09);
+        }
+
+        .how-card,
+        .task-card,
+        .tip-card {
+            padding: 28px;
+        }
+
+        .how-card i,
+        .task-card i,
+        .tip-card i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 58px;
+            height: 58px;
+            margin-bottom: 18px;
+            border-radius: 50%;
+            background: rgba(20, 175, 177, 0.14);
+            color: var(--primary-color);
+            font-size: 1.35rem;
+        }
+
+        .how-card h3,
+        .task-card h3,
+        .tip-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .how-to-actions,
+        .how-to-tips,
+        .how-to-quick-links {
+            padding: 36px 0 80px;
+        }
+
+        .task-card p,
+        .tip-card p,
+        .how-card p {
+            color: #4e5c69;
+            margin-bottom: 14px;
+        }
+
+        .task-link {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .task-link:hover {
+            text-decoration: underline;
+        }
+
+        .quick-links-panel {
+            padding: 32px;
+        }
+
+        .quick-links-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px 22px;
+            margin-top: 18px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .quick-links-list a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .quick-links-list a:hover {
+            text-decoration: underline;
+        }
+
+        .help-cta {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .how-to-intro {
+                padding-top: 60px;
+            }
+
+            .quick-links-panel,
+            .how-card,
+            .task-card,
+            .tip-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="how-to-page">
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="mobile-logo">
+                    <a href="../index.html">
+                        <img src="../images/Cornerstone.jpg" alt="Cornerstone Baptist Church Logo">
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="menu-label">Menu</span>
+                </button>
+
+                <ul class="nav-menu">
+                    <li class="dropdown">
+                        <a href="#">I'm New <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="how-to-use.html">How to Use This Website</a></li>
+                            <li><a href="mission.html">Our Mission</a></li>
+                            <li><a href="beliefs.html">What We Believe</a></li>
+                            <li><a href="staff.html">Meet Our Staff</a></li>
+                            <li><a href="visit.html">Plan Your Visit</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="visitors-card.html">Visitors Card</a></li>
+                            <li><a href="prayer.html">Prayer Requests</a></li>
+                            <li><a href="heaven.html">Heaven</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li class="dropdown">
+                        <a href="ministries.html">Ministries <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu two-column">
+                            <li><a href="children.html">Kids</a></li>
+                            <li><a href="youth-ministry.html">Youth</a></li>
+                            <li><a href="couples.html">Couples</a></li>
+                            <li><a href="missions.html">Missions</a></li>
+                            <li><a href="school-ministry.html">School Ministry</a></li>
+                            <li><a href="sned-ministry.html">SNED Ministry</a></li>
+                            <li><a href="police-ministry.html">Police Ministry</a></li>
+                            <li><a href="aetas-ministry.html">Aetas Ministry</a></li>
+                            <li><a href="medicine-ministry.html">Medicine Ministry</a></li>
+                            <li><a href="deaf-ministry.html">Deaf Ministry</a></li>
+                            <li><a href="childrens-ministry-subject.html">Children's Ministry Subject</a></li>
+                            <li><a href="discipleship-ministry.html">Discipleship Ministry</a></li>
+                            <li><a href="visitation-ministry-subject.html">Visitation Ministry Subject</a></li>
+                            <li><a href="home-bible-study-ministry.html">Home Bible Study</a></li>
+                            <li class="dropdown sub-dropdown">
+                                <a href="#">More <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li><a href="ushers-help.php">Ushers Help</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Media <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="learn-signs.html">Learn Signs</a></li>
+                            <li><a href="https://www.facebook.com/" target="_blank">Connect on Facebook</a></li>
+                            <li><a href="media-library.html">Cornerstone Media Library</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                </ul>
+
+                <div class="nav-cta-buttons">
+                    <a href="visit.html" class="btn btn-nav-outline">Plan Your Visit</a>
+                    <a href="heaven.html" class="btn btn-nav-filled">Heaven</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1>How to Use This Website</h1>
+            <p>Find the right page quickly and know what to click next.</p>
+        </div>
+    </section>
+
+    <section class="how-to-intro">
+        <div class="container">
+            <div class="how-to-lead">
+                <div class="section-header">
+                    <h2>Start Here</h2>
+                    <div class="divider"></div>
+                </div>
+                <p>This website is designed to help new visitors, church members, and families find important information fast. Use the menu at the top of the page on desktop, or tap the <strong>Menu</strong> button on your phone to open the site navigation.</p>
+            </div>
+
+            <div class="how-to-grid">
+                <div class="how-card">
+                    <i class="fas fa-bars"></i>
+                    <h3>1. Open the Menu</h3>
+                    <p>Use the top navigation to explore the main sections. On mobile, tap the Menu button to see all the links.</p>
+                </div>
+                <div class="how-card">
+                    <i class="fas fa-link"></i>
+                    <h3>2. Choose Your Goal</h3>
+                    <p>Each page is built around a specific task like planning a visit, asking for prayer, learning about ministries, or contacting the church.</p>
+                </div>
+                <div class="how-card">
+                    <i class="fas fa-hand-point-up"></i>
+                    <h3>3. Use the Buttons</h3>
+                    <p>Look for buttons such as <strong>Plan Your Visit</strong>, <strong>Contact Us</strong>, or <strong>Give</strong> to move directly to the next step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-to-actions">
+        <div class="container">
+            <div class="section-header">
+                <h2>Common Things You Can Do</h2>
+                <div class="divider"></div>
+                <p>Use these quick paths if you already know what you need.</p>
+            </div>
+
+            <div class="task-grid">
+                <div class="task-card">
+                    <i class="fas fa-church"></i>
+                    <h3>Plan a Visit</h3>
+                    <p>See service times, what to expect, and where the church is located before you come.</p>
+                    <a class="task-link" href="visit.html">Go to Plan Your Visit</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Get Directions</h3>
+                    <p>Open the directions page when you are ready to travel to the church or share the location with someone else.</p>
+                    <a class="task-link" href="directions.html">Open Directions</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Send a Message</h3>
+                    <p>Use the contact page if you have a question, need help, or want someone from the church to reach out to you.</p>
+                    <a class="task-link" href="contact.html">Contact the Church</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-hands-praying"></i>
+                    <h3>Share a Prayer Request</h3>
+                    <p>Open the prayer page and fill out the form if there is something you would like the church to pray about.</p>
+                    <a class="task-link" href="prayer.html">Submit a Prayer Request</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Fill Out a Visitor Card</h3>
+                    <p>If you are new, the visitor card is a simple way to introduce yourself and let the church know you visited.</p>
+                    <a class="task-link" href="visitors-card.html">Open Visitor Card</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Give Online</h3>
+                    <p>Use the giving page if you want to support the ministry or find the available giving options.</p>
+                    <a class="task-link" href="give.html">Go to Give</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Explore Ministries</h3>
+                    <p>Visit the ministries page to find groups and programs for children, youth, adults, missions, and more.</p>
+                    <a class="task-link" href="ministries.html">Browse Ministries</a>
+                </div>
+                <div class="task-card">
+                    <i class="fas fa-book-bible"></i>
+                    <h3>Learn More About the Church</h3>
+                    <p>Read about the church mission, beliefs, next steps, and the message of Heaven if you are just getting started.</p>
+                    <a class="task-link" href="beliefs.html">Read What We Believe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-to-tips">
+        <div class="container">
+            <div class="section-header">
+                <h2>Helpful Tips</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <i class="fas fa-mobile-screen-button"></i>
+                    <h3>Using a Phone</h3>
+                    <p>Tap the Menu button at the top of the page to open the full navigation. Tap any link inside the menu to go directly to that page.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-square-arrow-up-right"></i>
+                    <h3>Opening Outside Links</h3>
+                    <p>Some links, such as Facebook, may open in a new tab so you can keep your place on the church website.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-file-lines"></i>
+                    <h3>Using Forms</h3>
+                    <p>On contact and prayer pages, fill in the required fields and press the submit button. Keep your email or phone number accurate if you want a reply.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-to-quick-links">
+        <div class="container">
+            <div class="quick-links-panel">
+                <div class="section-header">
+                    <h2>Quick Links</h2>
+                    <div class="divider"></div>
+                    <p>These are some of the most useful pages for first-time users.</p>
+                </div>
+
+                <ul class="quick-links-list">
+                    <li><a href="visit.html">Plan Your Visit</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="prayer.html">Prayer Requests</a></li>
+                    <li><a href="visitors-card.html">Visitors Card</a></li>
+                    <li><a href="directions.html">Directions</a></li>
+                    <li><a href="give.html">Give</a></li>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                    <li><a href="beliefs.html">What We Believe</a></li>
+                    <li><a href="next-steps.html">Next Steps</a></li>
+                    <li><a href="media-library.html">Media Library</a></li>
+                    <li><a href="learn-signs.html">Learn Signs</a></li>
+                </ul>
+
+                <div class="help-cta">
+                    <a href="contact.html" class="btn btn-primary">Still Need Help? Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cornerstone Baptist Church</h3>
+                    <p>Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p class="footer-tagline">A place you can call home.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Service Times</h4>
+                    <p>Sunday School: 9:00 AM - 10:00 AM</p>
+                    <p>Morning Service: 10:00 AM - 11:30 AM</p>
+                    <p>Afternoon Service: 2:00 PM - 3:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="how-to-use.html">How to Use This Website</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="beliefs.html">What We Believe</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Sitio Magurul-gurol, Anupul, Bamban, Tarlac</p>
+                    <p><i class="fas fa-phone"></i> 09367777459 / 09928528704</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:andypena1330@gmail.com" style="color: #FFFFFF !important;">andypena1330@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Cornerstone Baptist Church of Sitio Magurul-gurol, Anupul, Bamban, Tarlac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
