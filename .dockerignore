@@ -1,0 +1,10 @@
+.git
+.netlify
+node_modules
+dist
+.env
+.env.local
+*.log
+*.zip
+*.tar.gz
+Cornerstone_BaptistPrime

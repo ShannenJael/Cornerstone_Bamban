@@ -1,0 +1,21 @@
+{
+  "name": "cornerstone-bamban-netlify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "node scripts/prepare-netlify.mjs",
+    "dev": "node scripts/netlify-dev.mjs",
+    "serve": "netlify serve --dir dist --functions netlify/functions --port 8888 --offline --no-open",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.0.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "27.4.0"
+  }
+}

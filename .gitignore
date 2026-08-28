@@ -18,6 +18,10 @@ data/media-library/
 # Node modules (if any)
 node_modules/
 
+# Netlify build/local state
+dist/
+.netlify/
+
 # Logs
 *.log
 

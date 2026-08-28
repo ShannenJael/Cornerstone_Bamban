@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Page Not Found | Cornerstone Baptist Church</title>
+    <link rel="icon" type="image/png" href="/images/Cornerstone.jpg">
+    <link rel="apple-touch-icon" href="/images/Cornerstone.jpg">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 48px 16px;
+            background: #f7f9fb;
+        }
+
+        .error-panel {
+            width: min(760px, 100%);
+            margin: 0 auto;
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #e0e7ef;
+            border-radius: 8px;
+            padding: 40px 28px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        .error-logo {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 22px;
+        }
+
+        .error-code {
+            color: #14afb1;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .error-panel h1 {
+            margin-bottom: 14px;
+            color: #14324a;
+        }
+
+        .error-panel p {
+            max-width: 560px;
+            margin: 0 auto 24px;
+            color: #4f6475;
+        }
+
+        .error-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <main class="error-page">
+        <section class="error-panel" aria-labelledby="error-title">
+            <img class="error-logo" src="/images/Cornerstone.jpg" alt="Cornerstone Baptist Church logo">
+            <div class="error-code">404</div>
+            <h1 id="error-title">Page Not Found</h1>
+            <p>The page may have moved or is no longer available. You can return to the home page or browse the church ministries.</p>
+            <div class="error-actions">
+                <a class="btn btn-primary" href="/index.html">Home</a>
+                <a class="btn btn-secondary" href="/pages/ministries.html">Ministries</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
